@@ -1,0 +1,6 @@
+module Pods_FiaipApp {
+  umbrella header "Pods-FiaipApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
