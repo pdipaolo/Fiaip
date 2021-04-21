@@ -13,7 +13,7 @@ import MapIcon from '../../assets/images/map.svg';
 import SearchIcon from '../../assets/images/search.svg';
 import UserIcon from '../../assets/images/user.svg';
 
-import { secondaryColor, secondaryColorOpacity} from '../../constants/Colors'
+import { primaryColor, grey} from '../../constants/Colors'
 
 const Tab = createBottomTabNavigator();
 
@@ -40,8 +40,8 @@ function Home() {
             },
           })}
           tabBarOptions={{
-            activeTintColor: secondaryColor,
-            inactiveTintColor: secondaryColorOpacity,
+            activeTintColor: primaryColor,
+            inactiveTintColor: grey,
             showIcon: true
           }}
         >
