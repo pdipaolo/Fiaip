@@ -13,7 +13,7 @@ import {
   } from '../../../constants/Colors';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.89);
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 const shadowOpt = {
     width: ITEM_WIDTH,
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     serchBar:{
       width: ITEM_WIDTH,
       height: 40,
-      padding: 10,
+      paddingTop: 10,
       borderColor: primaryColor,
       borderWidth: 2,
       borderStyle: 'solid',

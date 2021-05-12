@@ -76,7 +76,7 @@ function Cerca(props) {
   }, [text]);
 
   return (
-    <View style={ {display:'flex', flexDirection: 'column',height: '100%',paddingBottom:0 }}>
+    <View style={ {display:'flex', flexDirection: 'column',height: '100%',paddingTop: 30, backgroundColor: white }}>
       <View style={{flex:0.35,backgroundColor: '#fff' }}>
         <View style={{ padding: 20 }}>
           <BoxShadow setting={shadowOpt}>
@@ -89,15 +89,15 @@ function Cerca(props) {
         </View>
 
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
-          <ButtonContainer style={{ flex: 0.33 }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33 }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false}>
             <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33 }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
           </ButtonContainer>
@@ -117,7 +117,7 @@ function Cerca(props) {
         </BoxShadow>
       </View>
 
-      <View style={{flex:0.7,backgroundColor: white }}>
+      <View style={{flex:0.65,backgroundColor: white }}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }}>
           <View style={{ flex: 0.60, height: 30 }}></View>
           <Text style={{ flex: 0.20, height: 30 }}>V.M.U</Text>
