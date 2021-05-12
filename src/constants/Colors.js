@@ -6,7 +6,8 @@ const secondaryColorOpacity = '#E8DFC0';
 const white = '#ffffff';
 const black = '#000000';
 const grey = '#8E8E93';
-const lightblue = '#919DB1';
+const lightblue = '#C2C9D4';
+
 
 export {
     primaryColor,

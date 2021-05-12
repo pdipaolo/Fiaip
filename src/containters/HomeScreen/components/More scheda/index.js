@@ -12,7 +12,7 @@ const ButtonMoreScheda = styled.TouchableOpacity`
 `;
 
 const ButtonTextMoreScheda = styled.Text`
-    font-size: 12px;
+    font-size: 16px;
     color: ${lightblue};
 `;
 

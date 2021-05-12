@@ -51,7 +51,7 @@ function Home() {
           />
           <Tab.Screen 
             name="Cerca" 
-            component={Cerca} 
+            component={Cerca}
           />
           <Tab.Screen 
             name="Fascicoli" 
