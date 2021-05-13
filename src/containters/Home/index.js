@@ -42,12 +42,13 @@ function Home() {
           tabBarOptions={{
             activeTintColor: primaryColor,
             inactiveTintColor: grey,
-            showIcon: true
+            showIcon: true,
           }}
+          
         >
           <Tab.Screen 
             name="Home" 
-            component={HomeScreen} 
+            component={HomeScreen}
           />
           <Tab.Screen 
             name="Cerca" 

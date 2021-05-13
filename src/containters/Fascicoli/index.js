@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   FlatList,
   Text,
   TextInput,
@@ -32,7 +31,7 @@ import {
   shadowLine,
 } from './components/BoxWrapper';
 
-function Fascicoli() {
+function Fascicoli({navigation}) {
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
   const dataList = [
@@ -91,10 +90,7 @@ function Fascicoli() {
               />
             </BoxShadow>
           </View>
-
-            <HomeIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColor}
-            onPress={test} />
-            
+          <HomeIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColor} onPress={test} />  
         </View>
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
           <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
@@ -131,7 +127,7 @@ function Fascicoli() {
         <FlatList
           data={data}
           initialNumToRender={50}
-          renderItem={({ item, index }) => <RowWrapper item={item} index={index} />}
+          renderItem={({ item, index }) => <RowWrapper item={item} index={index} navigation={navigation}/>}
 
         />
       </View>
