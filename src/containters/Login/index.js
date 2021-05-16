@@ -4,12 +4,10 @@ import {
     View,
     Button,
   } from 'react-native';
-import MapImage from '../../components/mappa'
 function Login({ navigation }) {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <MapImage/>
         <Text>Login</Text>
         <Button
         title="Effettua Login"
