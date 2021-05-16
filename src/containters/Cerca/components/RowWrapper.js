@@ -12,9 +12,9 @@ import { lightblue, primaryColor, secondaryColor, white } from '../../../constan
 
     return(
         <View style={{flexDirection: "row",paddingTop:20,paddingLeft:20, height: 60, backgroundColor: backgroundColor}}>
-            <Text style={{flex: 0.60, height: 60, color: textColor}}>{item.key}</Text>
-            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.key}</Text>
-            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.key}</Text>
+            <Text style={{flex: 0.60, height: 60, color: textColor}}>{item.Address}</Text>
+            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.VMU}</Text>
+            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.VLU}</Text>
         </View>
     )
   };

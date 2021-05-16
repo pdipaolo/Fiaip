@@ -30,48 +30,23 @@ import {
   shadowLine,
 } from './components/BoxWrapper';
 
+import json from './data.json';
+
 function Cerca(props) {
   const { route } = props;
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-  const dataList = [
-    { key: '1' },
-    { key: '2' },
-    { key: '3' },
-    { key: '4' },
-    { key: '5' },
-    { key: '6' },
-    { key: '7' },
-    { key: '8' },
-    { key: '9' },
-    { key: '10' },
-    { key: '11' },
-    { key: '12' },
-    { key: '13' },
-    { key: '14' },
-    { key: '15' },
-    { key: '16' },
-    { key: '17' },
-    { key: '18' },
-    { key: '19' },
-    { key: '20' },
-    { key: '21' },
-    { key: '22' },
-    { key: '23' },
-    { key: '24' },
-    { key: '25' },
-    { key: '26' },
-    { key: '27' },
-    { key: '28' },]
+  const dataList = json.Na_residenziale
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
+  
   React.useEffect(() => {
+    // route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
     setButtonType(route.params?.type)
   }, [route.params?.type]);
 
   React.useEffect(() => {
-
-    const result = dataList.filter( x => x.key.toLowerCase().includes(text.toLowerCase()))
+    const result = dataList.filter( x => x.Address?.toLowerCase().includes(text.toLowerCase()))
     setData(result)
   }, [text]);
 
@@ -127,7 +102,7 @@ function Cerca(props) {
           data={data}
           initialNumToRender={50}
           renderItem={({ item, index }) => <RowWrapper item={item} index={index} />}
-
+          keyExtractor={(item, index) => index.toString()}
         />
       </View>
     </View>
