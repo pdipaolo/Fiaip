@@ -24,14 +24,13 @@ import {
 export default function renderItem({item}){
   const boxShadow = {
     width: 300,
-    height:360,
-    color:"#000",
-    border:4,
-    radius:7,
-    opacity:0.1,
-    x:0,
-    y:3,
-    
+    height:365,
+    color:"#555",
+    border:10,
+    radius:10,
+    opacity:0.3,
+    x:2,
+    y:10,  
 };
     return (
       <BoxShadow setting={boxShadow}>
@@ -41,9 +40,8 @@ export default function renderItem({item}){
             backgroundColor:white,
             borderRadius: 5,
             height: 350,
-            padding: 10,
-            marginRight: 0,
-            marginBottom:10,
+            padding: 20,
+            paddingBottom: 20,
             marginTop:5,
             }}>
           <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
