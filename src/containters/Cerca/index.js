@@ -30,7 +30,7 @@ import {
   shadowLine,
 } from './components/BoxWrapper';
 
-import json from './data.json';
+import json from './dataRicerca.json';
 
 function Cerca(props) {
   const { route } = props;
@@ -41,12 +41,12 @@ function Cerca(props) {
   const [text, setText] = React.useState('');
   
   React.useEffect(() => {
-    // route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
-    setButtonType(route.params?.type)
+    route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
+    // setButtonType(route.params?.type)
   }, [route.params?.type]);
 
   React.useEffect(() => {
-    const result = dataList.filter( x => x.Address?.toLowerCase().includes(text.toLowerCase()))
+    const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
     setData(result)
   }, [text]);
 
