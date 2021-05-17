@@ -45,11 +45,11 @@ export default function renderItem({item}){
             marginTop:5,
             }}>
           <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text >{item.title}</Text>
+            <Text >{item.address}</Text>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
           </View>
           <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text>{item.text}</Text>
+            <Text>{item.city}</Text>
             <Text>Vendita</Text>
           </View>
           <View style={{ flex: 0.6, flexDirection: "row", justifyContent: 'space-between'}}>
