@@ -44,7 +44,8 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-      height: 110,
+      height: 160,
+      padding: 10,
     },
     image:{
       justifyContent: 'center',
