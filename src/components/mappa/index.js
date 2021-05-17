@@ -1,6 +1,7 @@
 import React from 'react';
 import {
     View,
+    TouchableOpacity,
   } from 'react-native';
 import V1 from '../../assets/images/mappa/V1.svg';
 import V2 from '../../assets/images/mappa/V2.svg';
@@ -16,8 +17,12 @@ import V10 from '../../assets/images/mappa/V10.svg';
 function MapImage() {
 
     return (
-        <View style={{width:'100%', backgroundColor: 'yellow'}}>
-          <V1 style={{position: 'absolute', top: 175, left: 120}}/>
+        <View style={{width:'100%'}}>
+
+            <V1 style={{position: 'absolute', top: 175, left: 120 , zIndex:10}} onPress={() => {
+              console.log('onPress rect1');
+            }}/>
+        
           <V2 style={{position: 'absolute', top: 142, left: 230}}/>
           <V3 style={{position: 'absolute', top: 68, left: 212}}/>
           <V4 style={{position: 'absolute', top: 85, left: 250}}/>
@@ -26,7 +31,10 @@ function MapImage() {
           <V7 style={{position: 'absolute', top: 32, left: 248}}/>
           <V8 style={{position: 'absolute', top: 0, left: 140}}/>
           <V9 style={{position: 'absolute', top: 100, left: 50}}/>
-          <V10 style={{position: 'absolute', top: 170, left: 80}}/>
+          <V10 style={{position: 'absolute', top: 170, left: 80 , zIndex:10}} onPress={() => {
+              console.log('onPress rect10');
+            }}/>
+          
         </View>
     );
   };
