@@ -62,8 +62,8 @@ import {
     image:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: 30,
-      height: 30,
+      width: 50,
+      height: 50,
     },
     text:{
       fontSize:18,
