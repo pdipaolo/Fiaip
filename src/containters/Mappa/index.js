@@ -1,13 +1,15 @@
 import React from 'react';
 import {
-    Text,
     View,
   } from 'react-native';
+import MapImage from '../../components/mappa'
 
 function Mappa() {
+  
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Mappa!</Text>
+      <View style={{ flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'center' }}>
+        <MapImage viewBox="-16 -16 544 544"/>
+        
       </View>
     );
   };
