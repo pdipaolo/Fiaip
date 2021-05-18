@@ -38,22 +38,16 @@ function Cerca(props) {
   const { route } = props;
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-<<<<<<< HEAD
-  const dataList = [
-    { key: '1' },
-    { key: '2' },]
-=======
   const dataList = json.Na_residenziale
->>>>>>> components/fascicoli
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
-  
   const searchText = () =>{
     const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
     setData(result)
   }
 
   React.useEffect(()=>{
+    
     searchText()
   }, [buttonType])
 
@@ -62,11 +56,7 @@ function Cerca(props) {
   }, [provType])
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    route.params?.type ?  setButtonType(route.params?.type) : setButtonType(0)
-=======
     route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
->>>>>>> components/fascicoli
     // setButtonType(route.params?.type)
   }, [route.params?.type]);
 
