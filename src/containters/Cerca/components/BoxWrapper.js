@@ -60,15 +60,25 @@ const styles = StyleSheet.create({
       fontWeight: 'bold',
       color: primaryColor,
     },
-    serchBar:{
+    searchContainer:{
       width: ITEM_WIDTH,
       height: 40,
-      padding: 10,
       borderColor: primaryColor,
       borderWidth: 2,
       borderStyle: 'solid',
-      backgroundColor: white
+      backgroundColor: white,
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingLeft: 10,
     },
+    searchBar:{
+      width: ITEM_WIDTH,
+      height: 40,
+      backgroundColor: 'transparent',
+      flex:0.8,
+      fontSize:18,
+      paddingBottom: 9
+    }
   });
 
 const ProvContainer = styled.TouchableOpacity`

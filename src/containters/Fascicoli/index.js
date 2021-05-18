@@ -12,6 +12,7 @@ import {
   secondaryColorOpacity,
   white,
   secondaryColor,
+  grey,
 } from '../../constants/Colors';
 
 import {
@@ -23,6 +24,7 @@ import { BoxShadow } from 'react-native-shadow';
 import CarIcon from '../../assets/images/car.svg'
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
+import SearchIcon from '../../assets/images/search.svg';
 import {
   shadowOpt,
   styles,
@@ -83,11 +85,14 @@ function Fascicoli({navigation}) {
         <View style={{ flexDirection: 'row', paddingLeft: 20, paddingTop: 20, paddingBottom:20 }}>
           <View style={{flex:0.90 }}>
             <BoxShadow setting={shadowOpt}>
+            <View style={styles.searchContainer}>
+            <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
               <TextInput
-                style={styles.serchBar}
+                style={styles.searchBar}
                 placeholder="Inserisci indirizzo"
                 onChangeText={text => setText(text)}
               />
+            </View>
             </BoxShadow>
           </View>
           <HomeIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColor} onPress={test} />  

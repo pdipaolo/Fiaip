@@ -11,6 +11,7 @@ import {
   primaryColor,
   secondaryColorOpacity,
   white,
+  grey,
 } from '../../constants/Colors';
 
 import {
@@ -22,6 +23,7 @@ import { BoxShadow } from 'react-native-shadow';
 import CarIcon from '../../assets/images/car.svg'
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
+import SearchIcon from '../../assets/images/search.svg';
 import {
   shadowOpt,
   styles,
@@ -40,14 +42,27 @@ function Cerca(props) {
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
   
+  const searchText = () =>{
+    const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
+    setData(result)
+  }
+
+  React.useEffect(()=>{
+    searchText()
+  }, [buttonType])
+
+  React.useEffect(()=>{
+    searchText()
+  }, [provType])
+
   React.useEffect(() => {
     route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
     // setButtonType(route.params?.type)
   }, [route.params?.type]);
 
   React.useEffect(() => {
-    const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
-    setData(result)
+    console.log("here");
+      searchText()
   }, [text]);
 
   return (
@@ -55,24 +70,28 @@ function Cerca(props) {
       <View style={{flex:0.35,backgroundColor: '#fff' }}>
         <View style={{ padding: 20 }}>
           <BoxShadow setting={shadowOpt}>
-            <TextInput
-              style={styles.serchBar}
-              placeholder="Inserisci indirizzo"
-              onChangeText={text => setText(text)}
-            />
+            <View style={styles.searchContainer}>
+            <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
+              <TextInput
+                style={styles.searchBar}
+                placeholder="Inserisci indirizzo"
+                onChangeText={text => setText(text)}
+              />
+            </View>
+
           </BoxShadow>
         </View>
 
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(0)}} value={buttonType === 0 ? true : false}>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false}>
             <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
           </ButtonContainer>
