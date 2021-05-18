@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Carousel from 'react-native-snap-carousel';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
+import SQLite from 'react-native-sqlite-storage';
 
 import {
     Text,
@@ -88,28 +89,45 @@ import {
 
 function HomeScreen({ navigation }) {
     const [geolocalization, setGeolocalization] = useState('Nessuna posizione trovata')
-    const [carouselItems, setcarouselItems] = useState([
-      {
-          title:"Item 10'",
-          text: "Text 1",
-      },
-      {
-          title:"Item 2",
-          text: "Text 2",
-      },
-      {
-          title:"Item 3",
-          text: "Text 3",
-      },
-      {
-          title:"Item 4",
-          text: "Text 4",
-      },
-      {
-          title:"Item 5",
-          text: "Text 5",
-      },
-    ]);
+    const [carouselItems, setcarouselItems] = useState();
+
+    React.useEffect(()=>{
+      var db = SQLite.openDatabase({
+        name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest.db', },
+        () => {},
+        error => {
+          // TODO: Insert alert if db not work
+           console.log("error while opening DB: " + error);
+        });
+      db.transaction(function (txn) {
+        // // Drop the table if it exists
+        // txn.executeSql('DROP TABLE IF EXISTS Users', []);
+    
+        // // Create the table and define the properties of the columns
+        // txn.executeSql('CREATE TABLE IF NOT EXISTS Users(user_id INTEGER PRIMARY KEY NOT NULL, name VARCHAR(30))', []);
+    
+        // // Insert a record
+        // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['nora']);
+    
+        // // Insert another record
+        // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['takuya']);
+    
+        // Select all inserted records, loop over them while printing them on the console.
+        txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
+          console.log("Query completed");
+            let resArray = []
+            for (let i = 0; i < res.rows.length; ++i) {
+              resArray.push(res.rows.item(i))
+                // console.log('item:', res.rows.item(i));
+            }
+            setcarouselItems(resArray)
+            // console.log(resArray);
+        });
+    
+    });
+    },[])
+
+
 
   Geolocation.getCurrentPosition(
     (position) => {
