@@ -131,10 +131,12 @@ function HomeScreen({ navigation }) {
 
   Geolocation.getCurrentPosition(
     (position) => {
-      Geocoder.init('AIzaSyCY1LXStnB44VPJZYDUM2d6FD5oN-wpSRY');+
-      Geocoder.from(position.coords.latitude, position.coords.longitude)
+      Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
+      // Geocoder.from(position.coords.latitude, position.coords.longitude)
+      Geocoder.from('40.87682047278474', '15.185810238033884')
           .then(json => {
-              var addressComponent = json.results[0].address_components[0];
+              var addressComponent = json.results[0].formatted_address
+              setGeolocalization(addressComponent)
               console.log(addressComponent);
           })
           .catch(error =>
@@ -179,7 +181,7 @@ function HomeScreen({ navigation }) {
           <View style={[styles.localizzazione,{ flexDirection: "row", justifyContent:'center' }]}> 
             <ButtonLocalization style={{flex: 0.5}} color={white}>
               <ButtonTextLocalization color={lightblue} fontSize="13px" align="flex-start">Geolocalizzato in:</ButtonTextLocalization>
-              <ButtonTextLocalization color={primaryColor} fontSize="14px" align="flex-start">{geolocalization}</ButtonTextLocalization>
+              <ButtonTextLocalization color={primaryColor} fontSize="12px" align="flex-start">{geolocalization}</ButtonTextLocalization>
             </ButtonLocalization>
             <ButtonLocalization style={{flex: 0.5}} color={primaryColor}>
               <ButtonTextLocalization color={white} fontSize="14px" align="center">Avvia Ricerca</ButtonTextLocalization>
