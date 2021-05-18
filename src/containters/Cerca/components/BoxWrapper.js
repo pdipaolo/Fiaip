@@ -44,21 +44,16 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-<<<<<<< HEAD
-      height: 160,
-      padding: 10,
-=======
-      height: 130,
+      height: 140,
       paddingLeft: 10,
       paddingRight: 10,
       paddingBottom: 20,
->>>>>>> components/fascicoli
     },
     image:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: 30,
-      height: 30,
+      width: 40,
+      height: 40,
     },
     text:{
       fontSize: 14,

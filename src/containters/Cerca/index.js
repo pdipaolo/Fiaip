@@ -38,22 +38,16 @@ function Cerca(props) {
   const { route } = props;
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-<<<<<<< HEAD
-  const dataList = [
-    { key: '1' },
-    { key: '2' },]
-=======
   const dataList = json.Na_residenziale
->>>>>>> components/fascicoli
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
-  
   const searchText = () =>{
     const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
     setData(result)
   }
 
   React.useEffect(()=>{
+    
     searchText()
   }, [buttonType])
 
@@ -62,11 +56,7 @@ function Cerca(props) {
   }, [provType])
 
   React.useEffect(() => {
-<<<<<<< HEAD
-    route.params?.type ?  setButtonType(route.params?.type) : setButtonType(0)
-=======
     route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
->>>>>>> components/fascicoli
     // setButtonType(route.params?.type)
   }, [route.params?.type]);
 
@@ -98,12 +88,12 @@ function Cerca(props) {
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
           <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false}>
-            <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Box Auto</ButtonText>
-          </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
+          </ButtonContainer>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false}>
+            <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
+            <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>
         </View>
 
