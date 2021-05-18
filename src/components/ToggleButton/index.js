@@ -20,7 +20,7 @@ shadow-radius: 2px;
 `;
 
 const ButtonText = styled.Text`
-font-size: 12px;
+font-size: 14px;
 color: ${primaryColor};
 align-self: center;
 margin-top: 8px;

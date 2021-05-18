@@ -25,6 +25,7 @@ import CarIcon from '../../assets/images/car.svg'
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
 import SearchIcon from '../../assets/images/search.svg';
+import NewdossierIcon from '../../assets/images/newdossier.svg';
 import {
   shadowOpt,
   styles,
@@ -95,7 +96,7 @@ function Fascicoli({navigation}) {
             </View>
             </BoxShadow>
           </View>
-          <HomeIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColor} onPress={test} />  
+          <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={test} />  
         </View>
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
           <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
