@@ -13,6 +13,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './Login';
 import Home from './Home';
+import DettaglioFascicoli from './DettaglioFascicoli';
 
 import {
   StatusBar,
@@ -24,9 +25,17 @@ import { primaryColor, white } from '../constants/Colors';
 const Stack = createStackNavigator();
 
 const App = () => {
-
-  const headerStyle = {
+  const headerStyleHome = {
+    title: ``,
     headerLeft: null,
+    headerTitleAlign: 'center',
+    headerStyle: {
+      backgroundColor: primaryColor,
+    },
+    headerTintColor: white,
+  };
+  const headerStyleDetails = {
+    title: ``,
     headerTitleAlign: 'center',
     headerStyle: {
       backgroundColor: primaryColor,
@@ -46,13 +55,18 @@ const App = () => {
           component={Login} 
           options={{
             headerShown:false,
-            headerStyle:null
+            headerStyle:null,
           }}
         />
         <Stack.Screen 
           name="Home" 
           component={Home} 
-          options={headerStyle}
+          options={headerStyleHome}
+        />
+        <Stack.Screen 
+          name="Dettaglio Fascicolo" 
+          component={DettaglioFascicoli} 
+          options={headerStyleDetails}
         />
       </Stack.Navigator>
     </NavigationContainer>

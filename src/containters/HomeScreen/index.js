@@ -62,8 +62,8 @@ import {
     image:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: 30,
-      height: 30,
+      width: 50,
+      height: 50,
     },
     text:{
       fontSize:18,
@@ -82,6 +82,7 @@ import {
       fontWeight: 'bold',
       color: primaryColor,
       marginTop: 14,
+      marginLeft: 20,
     },
   });
 
@@ -168,7 +169,7 @@ function HomeScreen({ navigation }) {
           </View>
         </View>
 
-        <View style={{marginBottom: 60, padding: 20}}> 
+        <View style={{marginBottom: 60, padding: 0}}> 
           <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={styles.swipertext}>Ultimi fascicoli</Text>
             <ButtonMoreScheda>
@@ -177,12 +178,12 @@ function HomeScreen({ navigation }) {
           </View>
           <Carousel
                   layout={"default"}
-                  layoutCardOffset={9}
                   marginTop={40}
                   data={carouselItems}
                   sliderWidth={SLIDER_WIDTH}
                   itemWidth={ITEM_WIDTH}
                   renderItem={renderItem}
+                  sliderHeight={300}
           />
         </View>
       </ScrollView>

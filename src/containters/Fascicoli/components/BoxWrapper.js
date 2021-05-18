@@ -13,7 +13,7 @@ import {
   } from '../../../constants/Colors';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
-const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.89);
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
 
 const shadowOpt = {
     width: ITEM_WIDTH,
@@ -44,15 +44,10 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-<<<<<<< HEAD
-      height: 160,
-      padding: 10,
-=======
       height: 130,
       paddingLeft: 10,
       paddingRight: 10,
       paddingBottom: 20,
->>>>>>> components/fascicoli
     },
     image:{
       justifyContent: 'center',
@@ -83,7 +78,7 @@ const styles = StyleSheet.create({
       flex:0.8,
       fontSize:18,
       paddingBottom: 9
-    }
+    },
   });
 
 const ProvContainer = styled.TouchableOpacity`
