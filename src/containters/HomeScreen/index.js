@@ -62,8 +62,8 @@ import {
     image:{
       justifyContent: 'center',
       alignItems: 'center',
-      width: 50,
-      height: 50,
+      width: 40,
+      height: 40,
     },
     text:{
       fontSize:18,
@@ -145,12 +145,12 @@ function HomeScreen({ navigation }) {
               <ButtonText>Residenziale</ButtonText>
             </ButtonContainer>
             <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:1})} value={false}>
-              <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-              <ButtonText>Box Auto</ButtonText>
-            </ButtonContainer>
-            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:2})} value={false}>
               <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Commerciale</ButtonText>
+            </ButtonContainer>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:2})} value={false}>
+              <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+              <ButtonText>Box Auto</ButtonText>
             </ButtonContainer>
           </View>
         
@@ -160,8 +160,8 @@ function HomeScreen({ navigation }) {
           </View>
           <View style={[styles.localizzazione,{ flexDirection: "row", justifyContent:'center' }]}> 
             <ButtonLocalization style={{flex: 0.5}} color={white}>
-              <ButtonTextLocalization color={lightblue} fontSize="8px" align="flex-start">Geolocalizzato in:</ButtonTextLocalization>
-              <ButtonTextLocalization color={primaryColor} fontSize="11px" align="flex-start">{geolocalization}</ButtonTextLocalization>
+              <ButtonTextLocalization color={lightblue} fontSize="13px" align="flex-start">Geolocalizzato in:</ButtonTextLocalization>
+              <ButtonTextLocalization color={primaryColor} fontSize="14px" align="flex-start">{geolocalization}</ButtonTextLocalization>
             </ButtonLocalization>
             <ButtonLocalization style={{flex: 0.5}} color={primaryColor}>
               <ButtonTextLocalization color={white} fontSize="14px" align="center">Avvia Ricerca</ButtonTextLocalization>
