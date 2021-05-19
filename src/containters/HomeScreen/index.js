@@ -93,7 +93,7 @@ function HomeScreen({ navigation }) {
 
     React.useEffect(()=>{
       var db = SQLite.openDatabase({
-        name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest.db', },
+        name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest2.db', },
         () => {},
         error => {
           // TODO: Insert alert if db not work
@@ -129,30 +129,30 @@ function HomeScreen({ navigation }) {
 
 
 
-  Geolocation.getCurrentPosition(
-    (position) => {
-      Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
-      // Geocoder.from(position.coords.latitude, position.coords.longitude)
-      Geocoder.from('40.87682047278474', '15.185810238033884')
-          .then(json => {
-              var addressComponent = json.results[0].formatted_address
-              setGeolocalization(addressComponent)
-              console.log(addressComponent);
-          })
-          .catch(error =>
-              console.warn(error)
-          );
-        console.log(position.coords);
-    },
-    (error) => {
-        console.log(error.code, error.message);
-    },
-    {
-        enableHighAccuracy: false,
-        timeout: 10000,
-        maximumAge: 100000
-    }
-);
+//   Geolocation.getCurrentPosition(
+//     (position) => {
+//       Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
+//       // Geocoder.from(position.coords.latitude, position.coords.longitude)
+//       Geocoder.from('40.87682047278474', '15.185810238033884')
+//           .then(json => {
+//               var addressComponent = json.results[0].formatted_address
+//               setGeolocalization(addressComponent)
+//               console.log(addressComponent);
+//           })
+//           .catch(error =>
+//               console.warn(error)
+//           );
+//         console.log(position.coords);
+//     },
+//     (error) => {
+//         console.log(error.code, error.message);
+//     },
+//     {
+//         enableHighAccuracy: false,
+//         timeout: 10000,
+//         maximumAge: 100000
+//     }
+// );
 
     return (
       <ScrollView style={styles.container}>
