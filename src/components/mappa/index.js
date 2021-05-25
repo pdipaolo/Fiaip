@@ -17,7 +17,7 @@ import V10 from '../../assets/images/mappa/V10.svg';
 function MapImage() {
 
     return (
-        <View style={{width:'100%'}}>
+        <View style={{width:'100%',flex:0.5}}>
 
             <V1 style={{position: 'absolute', top: 175, left: 120 , zIndex:10}} onPress={() => {
               console.log('onPress rect1');

@@ -14,6 +14,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import Home from './Home';
 import DettaglioFascicoli from './DettaglioFascicoli';
+import DettaglioMunicipio from './DettaglioMunicipio';
 
 import {
   StatusBar,
@@ -66,6 +67,11 @@ const App = () => {
         <Stack.Screen 
           name="Dettaglio Fascicolo" 
           component={DettaglioFascicoli} 
+          options={headerStyleDetails}
+        />
+        <Stack.Screen 
+          name="Dettaglio Municipio" 
+          component={DettaglioMunicipio} 
           options={headerStyleDetails}
         />
       </Stack.Navigator>
