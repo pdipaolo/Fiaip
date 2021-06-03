@@ -14,6 +14,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import Login from './Login';
 import Home from './Home';
 import DettaglioFascicoli from './DettaglioFascicoli';
+import Profilo from './Profilo';
+import ChiSiamo from './ChiSiamo';
+import Tutorial from './Tutorial';
+import FeedBack from './FeedBack';
 
 import {
   StatusBar,
@@ -34,7 +38,8 @@ const App = () => {
     },
     headerTintColor: white,
   };
-  const headerStyleDetails = {
+  
+  const headerStylePushView = {
     title: ``,
     headerTitleAlign: 'center',
     headerStyle: {
@@ -66,7 +71,27 @@ const App = () => {
         <Stack.Screen 
           name="Dettaglio Fascicolo" 
           component={DettaglioFascicoli} 
-          options={headerStyleDetails}
+          options={headerStylePushView}
+        />
+        <Stack.Screen 
+          name="Profilo" 
+          component={Profilo} 
+          options={headerStylePushView}
+        />
+        <Stack.Screen 
+          name="Chi Siamo" 
+          component={ChiSiamo} 
+          options={headerStylePushView}
+        />
+        <Stack.Screen 
+          name="Tutorial" 
+          component={Tutorial} 
+          options={headerStylePushView}
+        />
+        <Stack.Screen 
+          name="FeedBack" 
+          component={FeedBack} 
+          options={headerStylePushView}
         />
       </Stack.Navigator>
     </NavigationContainer>

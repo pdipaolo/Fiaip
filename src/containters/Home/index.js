@@ -5,7 +5,7 @@ import HomeScreen from '../HomeScreen';
 import Cerca from '../Cerca';
 import Fascicoli from '../Fascicoli';
 import Mappa from '../Mappa';
-import Crediti from '../Mappa';
+import Crediti from '../Crediti';
 
 import HomeIcon from '../../assets/images/home.svg';
 import DossierIcon from '../../assets/images/dossier.svg';
