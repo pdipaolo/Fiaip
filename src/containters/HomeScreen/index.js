@@ -3,7 +3,7 @@ import Carousel from 'react-native-snap-carousel';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import SQLite from 'react-native-sqlite-storage';
-
+import { Platform, PermissionsAndroid } from 'react-native';
 import {
     Text,
     View,
@@ -38,6 +38,40 @@ import {
   import CarIcon from '../../assets/images/car.svg';
   import HomeIcon from '../../assets/images/home.svg';
   import BagIcon from '../../assets/images/bag.svg';
+
+const datamain = [{
+                id: 1,
+                tipology:'Appartamento',
+                address:'Corso Vittorio Emanuele 22',
+                city: 'Napoli',
+                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
+                size: '120mq',
+                characters: ' 5 camere, 2 bagni, balcone',
+                prize: '250',
+                status: 'Vendita'
+              },
+              {
+                id: 2,
+                tipology:'Box',
+                address:'Corso Vittorio Emanuele 23',
+                city: 'Napoli',
+                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
+                size: '120mq',
+                characters: ' 5 camere, 2 bagni, balcone',
+                prize: '250',
+                status: 'Vendita',
+              },
+              {
+                id: 3,
+                tipology:'Commerciale',
+                address:'Corso Vittorio Emanuele 24',
+                city: 'Napoli',
+                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
+                size: '120mq',
+                characters: ' 5 camere, 2 bagni, balcone',
+                prize: '250',
+                status: 'Vendita',
+              }]
 
   const SLIDER_WIDTH = Dimensions.get('window').width;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -89,7 +123,7 @@ import {
 
 function HomeScreen({ navigation }) {
     const [geolocalization, setGeolocalization] = useState('Nessuna posizione trovata')
-    const [carouselItems, setcarouselItems] = useState();
+    const [carouselItems, setcarouselItems] = useState(datamain);
 
     React.useEffect(()=>{
       var db = SQLite.openDatabase({
@@ -97,7 +131,7 @@ function HomeScreen({ navigation }) {
         () => {},
         error => {
           // TODO: Insert alert if db not work
-           console.log("error while opening DB: " + error);
+          //  console.log("error while opening DB: " + error);
         });
       db.transaction(function (txn) {
         // // Drop the table if it exists
@@ -118,41 +152,49 @@ function HomeScreen({ navigation }) {
             let resArray = []
             for (let i = 0; i < res.rows.length; ++i) {
               resArray.push(res.rows.item(i))
-                // console.log('item:', res.rows.item(i));
             }
             setcarouselItems(resArray)
-            // console.log(resArray);
         });
     
     });
     },[])
 
+    async function requestPermissions() {
+      if (Platform.OS === 'ios') {
+        Geolocation.requestAuthorization();
+        Geolocation.setRNConfiguration({
+          skipPermissionRequests: false,
+         authorizationLevel: 'whenInUse',
+       });
+      }
+    
+      if (Platform.OS === 'android') {
+        await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+        );
+      }
+    }
+  // React.useEffect(()=>{
+    requestPermissions() 
+    Geolocation.getCurrentPosition(
+      position => {
+        const initialPosition = JSON.stringify(position);
+        Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
+        // Geocoder.from(position.coords.latitude, position.coords.longitude)
+        Geocoder.from('40.87682047278474', '15.185810238033884')
+            .then(json => {
+                var addressComponent = json.results[0].formatted_address
+                setGeolocalization(addressComponent)
 
+            })
+            .catch(error =>
+                console.warn("error",error)
+            );
+      },
+      error => Alert.alert('Error', JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
 
-//   Geolocation.getCurrentPosition(
-//     (position) => {
-//       Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
-//       // Geocoder.from(position.coords.latitude, position.coords.longitude)
-//       Geocoder.from('40.87682047278474', '15.185810238033884')
-//           .then(json => {
-//               var addressComponent = json.results[0].formatted_address
-//               setGeolocalization(addressComponent)
-//               console.log(addressComponent);
-//           })
-//           .catch(error =>
-//               console.warn(error)
-//           );
-//         console.log(position.coords);
-//     },
-//     (error) => {
-//         console.log(error.code, error.message);
-//     },
-//     {
-//         enableHighAccuracy: false,
-//         timeout: 10000,
-//         maximumAge: 100000
-//     }
-// );
 
     return (
       <ScrollView style={styles.container}>

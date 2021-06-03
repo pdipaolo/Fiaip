@@ -103,11 +103,11 @@ function Fascicoli({navigation}) {
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(1)} value={buttonType === 2 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(2)} value={buttonType === 1 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false}>
             <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>

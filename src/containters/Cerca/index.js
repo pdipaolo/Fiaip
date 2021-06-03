@@ -61,7 +61,6 @@ function Cerca(props) {
   }, [route.params?.type]);
 
   React.useEffect(() => {
-    console.log("here");
       searchText()
   }, [text]);
 
@@ -114,8 +113,8 @@ function Cerca(props) {
       <View style={{flex:0.65,backgroundColor: white }}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }}>
           <View style={{ flex: 0.60, height: 30 }}></View>
-          <Text style={{ flex: 0.20, height: 30 }}>V.M.U</Text>
-          <Text style={{ flex: 0.20, height: 30 }}>V.L.U</Text>
+          <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.M.U</Text>
+          <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.L.U</Text>
         </View>
         <FlatList
           data={data}

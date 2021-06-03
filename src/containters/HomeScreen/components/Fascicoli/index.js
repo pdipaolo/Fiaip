@@ -62,7 +62,6 @@ export default function renderItem({item}){
     x:2,
     y:10,  
 };
-console.log(item);
   const  switchImage = (type) =>{
     switch (type) {
       case "Appartamento":
@@ -88,7 +87,7 @@ console.log(item);
             }}>
           <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={styles.textTitle} >{item.address}</Text>
-            {switchImage(item.typology)}
+            {switchImage(item.tipology)}
           </View>
           <View style={{ flex: 0.1}}>
             <Text style={styles.textCity}>{item.city}</Text>

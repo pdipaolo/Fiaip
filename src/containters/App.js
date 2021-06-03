@@ -18,6 +18,7 @@ import Profilo from './Profilo';
 import ChiSiamo from './ChiSiamo';
 import Tutorial from './Tutorial';
 import FeedBack from './FeedBack';
+import DettaglioMunicipio from './DettaglioMunicipio';
 
 import {
   StatusBar,
@@ -92,6 +93,11 @@ const App = () => {
           name="FeedBack" 
           component={FeedBack} 
           options={headerStylePushView}
+        />
+        <Stack.Screen 
+          name="Dettaglio Municipio" 
+          component={DettaglioMunicipio} 
+          options={headerStyleDetails}
         />
       </Stack.Navigator>
     </NavigationContainer>
