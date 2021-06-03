@@ -97,7 +97,7 @@ const App = () => {
         <Stack.Screen 
           name="Dettaglio Municipio" 
           component={DettaglioMunicipio} 
-          options={headerStyleDetails}
+          options={headerStylePushView}
         />
       </Stack.Navigator>
     </NavigationContainer>
