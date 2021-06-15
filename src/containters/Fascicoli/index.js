@@ -82,7 +82,7 @@ function Fascicoli({navigation}) {
   return (
     <View style={{ display: 'flex', flexDirection: 'column', height: '100%', paddingTop: 30, backgroundColor: white }}>
 
-      <View style={{ flex: 0.35, backgroundColor: '#fff' }}>
+      <View style={{ flex: 0.35, backgroundColor: '#fff',zIndex: 1}}>
         <View style={{ flexDirection: 'row', paddingLeft: 20, paddingTop: 20, paddingBottom:20 }}>
           <View style={{flex:0.90 }}>
             <BoxShadow setting={shadowOpt}>
@@ -98,7 +98,7 @@ function Fascicoli({navigation}) {
           </View>
           <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={test} />  
         </View>
-        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
+        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' ,backgroundColor: '#fff'}]}>
           <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
@@ -113,7 +113,7 @@ function Fascicoli({navigation}) {
           </ButtonContainer>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10 }}>
+        <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10,backgroundColor: '#fff' }}>
           <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(0)} value={provType === 0 ? true : false}>
             <ProvText value={provType === 0 ? true : false}>Napoli</ProvText>
           </ProvContainer>
@@ -127,7 +127,7 @@ function Fascicoli({navigation}) {
         </BoxShadow>
       </View>
 
-      <View style={{ flex: 0.65, backgroundColor: white }}>
+      <View style={{ flex: 0.65, backgroundColor: white ,zIndex: 0}}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }} />
 
         <FlatList
