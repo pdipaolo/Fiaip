@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
   }
 });
 export default function renderItem(item, navigation) {
+ 
   const boxShadow = {
     width: 330,
     height: 370,
@@ -71,39 +72,27 @@ export default function renderItem(item, navigation) {
     x: 2,
     y: 10,
   };
-  const data = [
-    { key: '1' },
-    { key: '2' },
-    { key: '3' },
-    { key: '4' },
-    { key: '5' },
-    { key: '6' },
-    { key: '7' },
-    { key: '8' },
-    { key: '9' },
-    { key: '10' },
-  ]
   const switchImage = (id) =>{
   switch (id) {
     case "1":
       return <V1 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 2:
+    case "2":
       return <V2 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 3:
+    case "3":
       return <V3 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 4:
+    case "4":
       return <V4 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 5:
+    case "5":
       return <V5 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 6:
+    case "6":
       return <V6 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 7:
+    case "7":
       return <V7 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 8:
+    case "8":
       return <V8 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 9:
+    case "9":
       return <V9 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
-    case 10:
+    case "10":
       return <V10 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
     default:
       return <V1 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
@@ -121,15 +110,15 @@ export default function renderItem(item, navigation) {
         marginTop: 5,
       }}>
         <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between', backgroundColor: primaryColor }}>
-          <Text style={styles.textTitle}>Municipalità N°{item.id}</Text>
-          {switchImage(item.id)}
+          <Text style={styles.textTitle}>Municipalità N°{item.Numero}</Text>
+          {switchImage(item.Numero)}
         </View>
         <View style={{ flex: 0.8, flexDirection: "row", justifyContent: 'space-between' }}>
           <FlatList
-            data={data}
+            data={item.Quartieri}
             initialNumToRender={50}
             renderItem={({ item, index }) => <RowWrapper item={item} index={index} navigation={navigation} />}
-
+            keyExtractor={(item,index)=> index.toString()}
           />
         </View>
       </View>

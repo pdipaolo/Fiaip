@@ -5,13 +5,12 @@ import {
   TextInput,
   View
 } from 'react-native';
-
+import { useIsFocused } from "@react-navigation/native";
 import { RowWrapper } from './components/RowWrapper';
 import {
   primaryColor,
   secondaryColorOpacity,
   white,
-  secondaryColor,
   grey,
 } from '../../constants/Colors';
 
@@ -19,6 +18,7 @@ import {
   ButtonContainer,
   ButtonText,
 } from '../../components/ToggleButton';
+import SQLite from 'react-native-sqlite-storage';
 
 import { BoxShadow } from 'react-native-shadow';
 import CarIcon from '../../assets/images/car.svg'
@@ -37,48 +37,59 @@ import {
 function Fascicoli({navigation}) {
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-  const dataList = [
-    { key: '1' },
-    { key: '2' },
-    { key: '3' },
-    { key: '4' },
-    { key: '5' },
-    { key: '6' },
-    { key: '7' },
-    { key: '8' },
-    { key: '9' },
-    { key: '10' },
-    { key: '11' },
-    { key: '12' },
-    { key: '13' },
-    { key: '14' },
-    { key: '15' },
-    { key: '16' },
-    { key: '17' },
-    { key: '18' },
-    { key: '19' },
-    { key: '20' },
-    { key: '21' },
-    { key: '22' },
-    { key: '23' },
-    { key: '24' },
-    { key: '25' },
-    { key: '26' },
-    { key: '27' },
-    { key: '28' },]
+  const [dataList,setDataList] = React.useState()
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
+  const db = SQLite.openDatabase({ name: 'FiaipDB.db' });
+  const isFocused = useIsFocused();
+  const searchText = () =>{
+    
+    // const result = dataList.filter( x => { console.log(x.obj.city,);})
+    const result = dataList?.filter(x => { return (x.obj.indirizzo.toLowerCase().includes(text.toLowerCase())) && x.obj.tipology == buttonType && x.obj.city == provType})
+    setData(result)
+  }
+
+  React.useEffect(()=>{
+    console.log("here");
+    searchText()
+  }, [])
+  React.useEffect(()=>{
+    
+    searchText()
+  }, [buttonType])
+
+  React.useEffect(()=>{
+    searchText()
+  }, [provType])
+
+  // React.useEffect(() => {
+  //   route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
+  //   // setButtonType(route.params?.type)
+  // }, [route.params?.type]);
 
   React.useEffect(() => {
-
-    const result = dataList.filter(x => x.key.toLowerCase().includes(text.toLowerCase()))
-    setData(result)
+      searchText()
   }, [text]);
 
-  function test() {
-    // TODO : Aggiungere apertura nuovo fascicolo
-    
-  }
+  React.useEffect(()=>{
+    db.transaction(function (txn) {
+      txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
+          let resArray = []
+          for (let i = 0; i < res.rows.length; ++i) {
+            resArray.push({id:res.rows.item(i).dossier_id, obj: JSON.parse( res.rows.item(i).dossier_obj)})
+          }
+          setDataList(resArray)
+          setData(resArray)
+          searchText()
+      });
+  })
+  },[isFocused])
+
+  // React.useEffect(() => {
+  //    const result = dataList?.filter(x => x.obj.indirizzo.toLowerCase().includes(text.toLowerCase()))
+  //     setData(result)
+  // }, [text]);
+
   return (
     <View style={{ display: 'flex', flexDirection: 'column', height: '100%', paddingTop: 30, backgroundColor: white }}>
 
@@ -96,7 +107,7 @@ function Fascicoli({navigation}) {
             </View>
             </BoxShadow>
           </View>
-          <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={test} />  
+          <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={()=> navigation.navigate('New Dossier',{data:null,id:null, navigation: navigation})} />  
         </View>
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' ,backgroundColor: '#fff'}]}>
           <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>

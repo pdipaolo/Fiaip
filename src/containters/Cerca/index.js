@@ -42,7 +42,7 @@ function Cerca(props) {
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
   const searchText = () =>{
-    const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
+    const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(text.toLowerCase())) && x.Type == buttonType && x.City == provType})
     setData(result)
   }
 

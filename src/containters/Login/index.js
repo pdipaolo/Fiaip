@@ -8,9 +8,8 @@ function Login({ navigation }) {
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>Login</Text>
         <Button
-        title="Effettua Login"
+        title="Entra"
         onPress={() => navigation.navigate('Home')}
       />
       </View>

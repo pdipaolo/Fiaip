@@ -4,6 +4,7 @@ import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import SQLite from 'react-native-sqlite-storage';
 import { Platform, PermissionsAndroid } from 'react-native';
+import { useIsFocused } from "@react-navigation/native";
 import {
     Text,
     View,
@@ -39,39 +40,6 @@ import {
   import HomeIcon from '../../assets/images/home.svg';
   import BagIcon from '../../assets/images/bag.svg';
 
-const datamain = [{
-                id: 1,
-                tipology:'Appartamento',
-                address:'Corso Vittorio Emanuele 22',
-                city: 'Napoli',
-                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
-                size: '120mq',
-                characters: ' 5 camere, 2 bagni, balcone',
-                prize: '250',
-                status: 'Vendita'
-              },
-              {
-                id: 2,
-                tipology:'Box',
-                address:'Corso Vittorio Emanuele 23',
-                city: 'Napoli',
-                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
-                size: '120mq',
-                characters: ' 5 camere, 2 bagni, balcone',
-                prize: '250',
-                status: 'Vendita',
-              },
-              {
-                id: 3,
-                tipology:'Commerciale',
-                address:'Corso Vittorio Emanuele 24',
-                city: 'Napoli',
-                description: 'L’appartamento è in ottime condizioni, facilmente rivendibile.La proprietaria ha molto interesse a vendere ed è disposta a scendere del prezzo a causa di trasloco imminente.',
-                size: '120mq',
-                characters: ' 5 camere, 2 bagni, balcone',
-                prize: '250',
-                status: 'Vendita',
-              }]
 
   const SLIDER_WIDTH = Dimensions.get('window').width;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
@@ -121,43 +89,62 @@ const datamain = [{
     },
   });
 
+  
 function HomeScreen({ navigation }) {
     const [geolocalization, setGeolocalization] = useState('Nessuna posizione trovata')
-    const [carouselItems, setcarouselItems] = useState(datamain);
+    const [carouselItems, setcarouselItems] = useState(undefined);
+    const db = SQLite.openDatabase({ name: 'FiaipDB.db' });
+    
+    const isFocused = useIsFocused();
+
+    const renderItem2 = ({item}) => {
+      return renderItem(item,navigation)
+    }
 
     React.useEffect(()=>{
-      var db = SQLite.openDatabase({
-        name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest2.db', },
-        () => {},
-        error => {
-          // TODO: Insert alert if db not work
-          //  console.log("error while opening DB: " + error);
-        });
+      
       db.transaction(function (txn) {
-        // // Drop the table if it exists
-        // txn.executeSql('DROP TABLE IF EXISTS Users', []);
-    
-        // // Create the table and define the properties of the columns
-        // txn.executeSql('CREATE TABLE IF NOT EXISTS Users(user_id INTEGER PRIMARY KEY NOT NULL, name VARCHAR(30))', []);
-    
-        // // Insert a record
-        // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['nora']);
-    
-        // // Insert another record
-        // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['takuya']);
-    
-        // Select all inserted records, loop over them while printing them on the console.
         txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
-          console.log("Query completed");
             let resArray = []
             for (let i = 0; i < res.rows.length; ++i) {
-              resArray.push(res.rows.item(i))
+              resArray.push({id:res.rows.item(i).dossier_id, obj: JSON.parse( res.rows.item(i).dossier_obj)})
             }
+
             setcarouselItems(resArray)
         });
+    })
+    //   var db = SQLite.openDatabase({
+    //     name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest2.db', },
+    //     () => {},
+    //     error => {
+    //       // TODO: Insert alert if db not work
+    //       //  console.log("error while opening DB: " + error);
+    //     });
+    //   db.transaction(function (txn) {
+    //     // // Drop the table if it exists
+    //     // txn.executeSql('DROP TABLE IF EXISTS Users', []);
     
-    });
-    },[])
+    //     // // Create the table and define the properties of the columns
+    //     // txn.executeSql('CREATE TABLE IF NOT EXISTS Users(user_id INTEGER PRIMARY KEY NOT NULL, name VARCHAR(30))', []);
+    
+    //     // // Insert a record
+    //     // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['nora']);
+    
+    //     // // Insert another record
+    //     // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['takuya']);
+    
+    //     // Select all inserted records, loop over them while printing them on the console.
+    //     txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
+    //       console.log("Query completed");
+    //         let resArray = []
+    //         for (let i = 0; i < res.rows.length; ++i) {
+    //           resArray.push(res.rows.item(i))
+    //         }
+    //         setcarouselItems(resArray)
+    //     });
+    
+    // });
+    },[isFocused])
 
     async function requestPermissions() {
       if (Platform.OS === 'ios') {
@@ -235,7 +222,7 @@ function HomeScreen({ navigation }) {
           <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={styles.swipertext}>Ultimi fascicoli</Text>
             <ButtonMoreScheda>
-              <ButtonTextMoreScheda>+ Crea fascicolo</ButtonTextMoreScheda>
+              <ButtonTextMoreScheda onPress={()=> navigation.navigate('New Dossier', {data:null,id:null, navigation: navigation})}>+ Crea fascicolo</ButtonTextMoreScheda>
             </ButtonMoreScheda>
           </View>
           <Carousel
@@ -244,7 +231,7 @@ function HomeScreen({ navigation }) {
                   data={carouselItems}
                   sliderWidth={SLIDER_WIDTH}
                   itemWidth={ITEM_WIDTH}
-                  renderItem={renderItem}
+                  renderItem={renderItem2}
                   sliderHeight={300}
           />
         </View>

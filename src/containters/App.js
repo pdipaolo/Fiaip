@@ -19,7 +19,7 @@ import ChiSiamo from './ChiSiamo';
 import Tutorial from './Tutorial';
 import FeedBack from './FeedBack';
 import DettaglioMunicipio from './DettaglioMunicipio';
-
+import NewDossier from './NewDossier'
 import {
   StatusBar,
 } from 'react-native';
@@ -97,6 +97,11 @@ const App = () => {
         <Stack.Screen 
           name="Dettaglio Municipio" 
           component={DettaglioMunicipio} 
+          options={headerStylePushView}
+        />
+                <Stack.Screen 
+          name="New Dossier" 
+          component={NewDossier} 
           options={headerStylePushView}
         />
       </Stack.Navigator>

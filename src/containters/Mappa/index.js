@@ -7,10 +7,14 @@ import Carousel from 'react-native-snap-carousel';
 import renderItem from './components/renderItem';
 // import MapImage from '../../components/mappa';
 import MappaIm from '../../assets/images/mappa.svg';
+import json from '../../dati/Municipalita.json';
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.8);
 function Mappa({navigation}) {
-  const data = [{id: 1, lista: ["a1,a2,a3"]},{id: 2, lista: ["b1,b2,b3"]},{id: 3, lista: ["c1,c2,c3"]}]
+ 
+  // const data = [{id: 1, lista: ["a1,a2,a3"]},{id: 2, lista: ["b1,b2,b3"]},{id: 3, lista: ["c1,c2,c3"]}]
+  const data = json.Municipalita
   const renderItem2 = ({item}) => {
     return renderItem(item,navigation)
   }
