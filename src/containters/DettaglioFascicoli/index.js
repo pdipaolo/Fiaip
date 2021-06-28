@@ -57,13 +57,13 @@ function renderRow(item) {
 }
 function DettaglioFascicoli(props) {
   const { route } = props;
-  const data = [{name: `Proprietario - ${route.params.data.obj.contattiP?.nome}`,telefono: route.params.data.obj.contattiP?.numero},{name: `Portiere - ${route.params.data.obj.contattiPortiere?.nome}`,telefono: route.params.data.obj.contattiPortiere?.numero},{name: `Amministratore - ${route.params.data.obj.contattiAmministratore?.nome}`,telefono: route.params.data.obj.contattiAmministratore?.numero}]
+  const data = [{name: `Proprietario - ${route.params.data.obj?.contattiP?.nome}`,telefono: route.params.data.obj?.contattiP?.numero},{name: `Portiere - ${route.params.data.obj?.contattiPortiere?.nome}`,telefono: route.params.data.obj?.contattiPortiere?.numero},{name: `Amministratore - ${route.params.data.obj?.contattiAmministratore?.nome}`,telefono: route.params.data.obj?.contattiAmministratore?.numero}]
   
     return (
       <ScrollView >
         <Image
           source={{
-            uri: route.params.data.obj.imgPath,
+            uri: route.params.data.obj?.imgPath,
             }}
           style={{padding: 16, height: 240}}
         /> 
@@ -71,9 +71,9 @@ function DettaglioFascicoli(props) {
         <View style={{height: 2, marginRight: 16, marginLeft: 16, marginTop: 16, backgroundColor: secondaryColor}}/>
             
         <View style={{height: 250,marginLeft: 16, marginRight: 16,paddingTop:16 }}>
-        <Text style={{ color: primaryColor, fontSize: 22,fontWeight:'bold'}}>{route.params.data.obj.indirizzo}</Text>
+        <Text style={{ color: primaryColor, fontSize: 22,fontWeight:'bold'}}>{route.params.data.obj?.indirizzo}</Text>
             <Text style={{ color: secondaryColor, fontSize: 18,}}>Nota</Text>
-            <Text style={{ color: primaryColor, fontSize: 18, lineHeight: 30}}>{route.params.data.obj.note}</Text>
+            <Text style={{ color: primaryColor, fontSize: 18, lineHeight: 30}}>{route.params.data.obj?.note}</Text>
         <LinearGradient
           colors={['transparent', 'white' ]}
           style={styles.linearGradient}
@@ -83,7 +83,7 @@ function DettaglioFascicoli(props) {
         </View>
 
         <View style={{flexDirection: 'row', height: 100, marginRight: 16,marginLeft: 16,marginBottom: 16, backgroundColor: white, borderColor: secondaryColor, borderRadius: 6, borderWidth: 1, elevation: 4}}>
-            <TouchableWithoutFeedback onPress={()=> Linking.openURL(`google.navigation:q=${route.params.data.obj.indirizzo}&mode=a`)}>
+            <TouchableWithoutFeedback onPress={()=> Linking.openURL(`google.navigation:q=${route.params.data.obj?.indirizzo}&mode=a`)}>
                 <View style={{flexDirection:'column', flex: 0.333,marginRight: 2,marginLeft: 2,marginTop: 2, marginBottom: 8, borderRightWidth: 1, borderRightColor: secondaryColor, alignItems:'center',paddingTop: 18}}>
                     <IconMap width={26} height={26} fill={secondaryColor}/>
                     <Text style={styles.text} >Avvia Navigatore</Text>

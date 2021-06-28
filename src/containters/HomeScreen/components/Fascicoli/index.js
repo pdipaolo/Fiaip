@@ -5,6 +5,7 @@ import {
     View,
     StyleSheet,
     TouchableWithoutFeedback,
+    Dimensions
   } from 'react-native';
 import {switchImage} from '../../../../utils/switchIcon';
 import { 
@@ -26,7 +27,7 @@ import {
       flex: 0.1,
     },
     textTitle:{
-      fontSize: 22,
+      fontSize: 20,
       color: primaryColor,
       fontWeight: 'bold',
       flex: 0.9
@@ -34,7 +35,7 @@ import {
     textCity:{
       fontSize: 16,
       color: primaryColor,
-      top: -16
+      top: -8
     },
     typeText: {
       fontSize: 18,
@@ -54,11 +55,14 @@ import {
       color: primaryColor
     }
   });
+
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.75);
 export default function renderItem(item,navigation){
   
   const boxShadow = {
-    width: 300,
-    height:365,
+    width: ITEM_WIDTH,
+    height:ITEM_WIDTH ,
     color:"#555",
     border:10,
     radius:10,
@@ -89,7 +93,7 @@ export default function renderItem(item,navigation){
               justifyContent: 'space-evenly',
               backgroundColor:white,
               borderRadius: 5,
-              height: 350,
+              height: ITEM_WIDTH,
               padding: 16,
               marginTop:5,
               }}>

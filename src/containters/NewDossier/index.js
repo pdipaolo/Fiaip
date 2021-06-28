@@ -18,30 +18,44 @@ import styles from './styles.js';
 import { primaryColor, white } from '../../constants/Colors.js';
 
 import IconMap from '../../assets/images/map.svg';
-import HomeIcon from '../../assets/images/home.svg';
+import DeleteIcon from '../../assets/images/delete.svg';
+import GalleryIcon from '../../assets/images/gallery.svg';
+import CameraIcon from '../../assets/images/camera.svg';
 
   function NewDossier(props){
+      const { route } = props
     const db = openDatabase({ name: 'FiaipDB.db' });
-    const [dossier, setDossier] = React.useState(props.route.params.data);
+    const [dossier, setDossier] = React.useState(props.route.params.data ? props.route.params.data : null);
     const clean = () => {
-        // db.transaction(function (txn) {
-        //     txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
-                
-        //         for (let i = 0; i < res.rows.length; ++i) {
-        //             console.log(res.rows.item(i).dossier_obj);
-        //         }
-        //     });
-        // })
-        setDossier(null)
+      db.transaction(function (txn) {
+        txn.executeSql(`DELETE FROM dossier WHERE dossier_id=${route.params.id}`,[],     
+        (tx, results) => {
+          if (results.rowsAffected > 0) {
+            createAlertOneButton("Fascicolo Cancellato")
+          } else createAlertOneButton("Fascicolo non cancellato");
+        }
+        )
+      })
         };    
 
     const writeDb = () =>{
         
         db.transaction(function (txn) {
-            // txn.executeSql('DROP TABLE IF EXISTS dossier', []);
+            //txn.executeSql('DROP TABLE IF EXISTS dossier', []);
+            
             txn.executeSql('CREATE TABLE IF NOT EXISTS dossier(dossier_id INTEGER PRIMARY KEY NOT NULL, dossier_obj VARCHAR(300))', []);
-            txn.executeSql('INSERT INTO dossier (dossier_obj) VALUES (:dossier_obj)', [JSON.stringify(dossier)]);
-            createAlertOneButton("Fascicolo salvato")
+            route.params.id ? txn.executeSql(`UPDATE dossier set dossier_obj=? where dossier_id=${route.params.id}` , [JSON.stringify(dossier)],
+            (tx, results) => {
+              if (results.rowsAffected > 0) {
+                createAlertOneButton("Fascicolo Modificato")
+              } else createAlertOneButton("Fascicolo non salvato");
+            }) :
+            txn.executeSql('INSERT INTO dossier (dossier_obj) VALUES (:dossier_obj)', [JSON.stringify(dossier)],
+            (tx, results) => {
+                if (results.rowsAffected > 0) {
+                  createAlertOneButton("Fascicolo Salvato")
+                } else createAlertOneButton("Fascicolo non salvato");
+              })
         });
     };  
     
@@ -55,7 +69,7 @@ const launchAndroidCamera = () => {
     };
 
     launchCamera(options, (response) => {
-
+      console.log(response);
       if (response.didCancel) {
         console.log('User cancelled image picker');
       } else if (response.error) {
@@ -64,11 +78,16 @@ const launchAndroidCamera = () => {
         console.log('User tapped custom button: ', response.customButton);
         alert(response.customButton);
       } else {
-        const source = { uri: response.uri };
-
+        try {
+          setDossier({...dossier, imgPath: response.assets[0].uri})
+        } catch (error) {
+          alert("Accettare permessi")
+        }
+        
       }
     });
   }
+
   const launchGallery = () => {
     let options = {
       storageOptions: {
@@ -87,7 +106,12 @@ const launchAndroidCamera = () => {
         console.log('User tapped custom button: ', response.customButton);
         alert(response.customButton);
       } else {
-        setDossier({...dossier, imgPath: response.assets[0].uri})
+        try {
+          setDossier({...dossier, imgPath: response.assets[0].uri})
+        } catch (error) {
+          alert("Accettare permessi")
+        }
+        
       }
     });
   }
@@ -105,6 +129,7 @@ const launchAndroidCamera = () => {
       { text: "No"}
     ]
   );
+
   const createAlertOneButton = (text) =>
   Alert.alert(
     text,
@@ -112,7 +137,7 @@ const launchAndroidCamera = () => {
     [
       {
         text: "Ok",
-        onPress:()=> props.route.params.navigation.goBack() ,
+        onPress:()=> {props.route.params.navigation.navigate('Home')},
         style: "cancel"
       },
     ]
@@ -332,18 +357,20 @@ const launchAndroidCamera = () => {
                                         style={styles.containerImage}
                                     /> 
                                         <TouchableWithoutFeedback onPress={()=> createAlertTwoButton()}>
-                                            <HomeIcon style={styles.imageRemove} width={40} height={40} fill={primaryColor}/>
+                                            <DeleteIcon style={styles.imageRemove} width={40} height={40} fill={primaryColor}/>
                                         </TouchableWithoutFeedback>
                                     </View>: 
-                                    <View style={styles.containerImage}>
+                                    <View style={styles.containerViewButton}>
                                         <TouchableWithoutFeedback onPress={()=> launchGallery()}>
-                                                <View style={styles.buttonOne}>
-                                                    <Text style={styles.textButton} >Libreria</Text>
+                                                <View style={{ alignSelf: 'center',alignContent:'center'}} >
+                                                    <GalleryIcon style={styles.imageRemove} width={60} height={60} fill={primaryColor}/>
+                                                    {/* <Text style={[styles.textButton,{textAlign:'center',alignItems:'center',justifyContent:'center'}]} >Galleria</Text> */}
                                                 </View>
                                         </TouchableWithoutFeedback>
                                         <TouchableWithoutFeedback onPress={()=> launchAndroidCamera()}>
-                                                <View style={styles.buttonOne}>
-                                                    <Text style={styles.textButton} >Camera</Text>
+                                                <View style={{alignSelf: 'center',alignContent:'center'}}>
+                                                    <CameraIcon style={styles.imageRemove} width={60} height={60} fill={primaryColor}/>
+                                                    {/* <Text style={styles.textButton} >Camera</Text> */}
                                                 </View>
                                         </TouchableWithoutFeedback>
                 </View>}

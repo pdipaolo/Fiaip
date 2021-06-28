@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   FlatList,
-  Text,
+  Dimensions,
   TextInput,
   View
 } from 'react-native';
@@ -33,6 +33,8 @@ import {
   ProvText,
   shadowLine,
 } from './components/BoxWrapper';
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 
 function Fascicoli({navigation}) {
   const [buttonType, setButtonType] = React.useState(0);
@@ -43,16 +45,28 @@ function Fascicoli({navigation}) {
   const db = SQLite.openDatabase({ name: 'FiaipDB.db' });
   const isFocused = useIsFocused();
   const searchText = () =>{
-    
-    // const result = dataList.filter( x => { console.log(x.obj.city,);})
-    const result = dataList?.filter(x => { return (x.obj.indirizzo.toLowerCase().includes(text.toLowerCase())) && x.obj.tipology == buttonType && x.obj.city == provType})
-    setData(result)
+   
+    db.transaction(function (txn) {
+      txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
+        
+          let resArray = []
+          for (let i = 0; i < res.rows.length; ++i) {
+            if (JSON.parse( res.rows.item(i).dossier_obj).tipology == buttonType && JSON.parse( res.rows.item(i).dossier_obj).city == provType) {
+              resArray.push({id:res.rows.item(i).dossier_id, obj: JSON.parse( res.rows.item(i).dossier_obj)})
+            }
+          }
+          setDataList(resArray)
+          setData(resArray) 
+      });
+  })
+  
+    // const result = dataList?.filter(x => { return (x.obj.indirizzo.toLowerCase().includes(text.toLowerCase())) && x.obj.tipology == buttonType && x.obj.city == provType})
+    // setData(result)
   }
 
-  React.useEffect(()=>{
-    console.log("here");
-    searchText()
-  }, [])
+  // React.useEffect(()=>{
+  //   searchText()
+  // }, [])
   React.useEffect(()=>{
     
     searchText()
@@ -72,17 +86,8 @@ function Fascicoli({navigation}) {
   }, [text]);
 
   React.useEffect(()=>{
-    db.transaction(function (txn) {
-      txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
-          let resArray = []
-          for (let i = 0; i < res.rows.length; ++i) {
-            resArray.push({id:res.rows.item(i).dossier_id, obj: JSON.parse( res.rows.item(i).dossier_obj)})
-          }
-          setDataList(resArray)
-          setData(resArray)
-          searchText()
-      });
-  })
+    console.log("ciao");
+
   },[isFocused])
 
   // React.useEffect(() => {
@@ -91,9 +96,9 @@ function Fascicoli({navigation}) {
   // }, [text]);
 
   return (
-    <View style={{ display: 'flex', flexDirection: 'column', height: '100%', paddingTop: 30, backgroundColor: white }}>
+    <View style={{  height: '100%', paddingTop: 30, backgroundColor: white }}>
 
-      <View style={{ flex: 0.35, backgroundColor: '#fff',zIndex: 1}}>
+      <View style={{  backgroundColor: '#fff',zIndex: 1}}>
         <View style={{ flexDirection: 'row', paddingLeft: 20, paddingTop: 20, paddingBottom:20 }}>
           <View style={{flex:0.90 }}>
             <BoxShadow setting={shadowOpt}>
@@ -109,16 +114,16 @@ function Fascicoli({navigation}) {
           </View>
           <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={()=> navigation.navigate('New Dossier',{data:null,id:null, navigation: navigation})} />  
         </View>
-        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' ,backgroundColor: '#fff'}]}>
-          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false}>
+        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: white }]}>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false} height={ITEM_WIDTH/3}>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false} height={ITEM_WIDTH/3}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33, height: '100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false} height={ITEM_WIDTH/3}>
             <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>
@@ -138,8 +143,8 @@ function Fascicoli({navigation}) {
         </BoxShadow>
       </View>
 
-      <View style={{ flex: 0.65, backgroundColor: white ,zIndex: 0}}>
-        <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }} />
+      <View style={{  backgroundColor: white ,zIndex: 0}}>
+        <View style={{  paddingLeft: 20, height: 30 }} />
 
         <FlatList
           data={data}

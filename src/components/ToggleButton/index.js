@@ -7,8 +7,8 @@ import {
   } from '../../constants/Colors';
 
 const ButtonContainer = styled.TouchableOpacity`
-elevation: ${(props) => props.value === true ? 1 : 12};
-height: auto;
+elevation: ${(props) => props.value ? 1 : 12};
+height: ${(props) => props.height};
 border-radius: 2px;
 padding-vertical: 4px;
 padding-horizontal: 4px;

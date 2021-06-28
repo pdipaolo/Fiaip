@@ -3,9 +3,10 @@ import {
   FlatList,
   Text,
   TextInput,
-  View
+  View,
+  Dimensions
 } from 'react-native';
-
+import { useIsFocused } from "@react-navigation/native";
 import { RowWrapper } from './components/RowWrapper';
 import {
   primaryColor,
@@ -32,19 +33,26 @@ import {
   shadowLine,
 } from './components/BoxWrapper';
 
-import json from './dataRicerca.json';
-
+import json from '../../dati/dataRicerca.json';
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 function Cerca(props) {
   const { route } = props;
+  
+  const [text, setText] = React.useState('');
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-  const dataList = json.Na_residenziale
+  const dataList = json.dati
   const [data, setData] = React.useState(dataList)
-  const [text, setText] = React.useState('');
+  const isFocused = useIsFocused();
+  
   const searchText = () =>{
     const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(text.toLowerCase())) && x.Type == buttonType && x.City == provType})
     setData(result)
   }
+  React.useEffect(()=>{
+   setText( route.params?.address.split(",")[0] ? route.params?.address.split(",")[0] : '')
+  },[isFocused])
 
   React.useEffect(()=>{
     
@@ -65,13 +73,14 @@ function Cerca(props) {
   }, [text]);
 
   return (
-    <View style={ {display:'flex', flexDirection: 'column',height: '100%',paddingTop: 30, backgroundColor: white }}>
-      <View style={{flex:0.35,backgroundColor: '#fff',zIndex: 1 }}>
+    <View style={ {height: '100%',paddingTop: 30, backgroundColor: white }}>
+      <View style={{backgroundColor: white,zIndex: 1 }}>
         <View style={{ padding: 20, backgroundColor: '#fff'}}>
           <BoxShadow setting={shadowOpt}>
             <View style={styles.searchContainer}>
             <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
               <TextInput
+                defaultValue={route.params?.address.split(",")[0]}
                 style={styles.searchBar}
                 placeholder="Inserisci indirizzo"
                 onChangeText={text => setText(text)}
@@ -82,15 +91,15 @@ function Cerca(props) {
         </View>
 
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: '#fff' }]}>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(0)}} value={buttonType === 0 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(0)}} value={buttonType === 0 ? true : false} height={ITEM_WIDTH/3}>
             <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Residenziale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false} height={ITEM_WIDTH/3}>
             <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Commerciale</ButtonText>
           </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false}>
+          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false} height={ITEM_WIDTH/3}>
             <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
             <ButtonText>Box Auto</ButtonText>
           </ButtonContainer>
@@ -110,7 +119,7 @@ function Cerca(props) {
         </BoxShadow>
       </View>
 
-      <View style={{flex:0.65,backgroundColor: white,zIndex: 0 }}>
+      <View style={{backgroundColor: 'white',zIndex: 0 ,paddingTop:16}}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }}>
           <View style={{ flex: 0.60, height: 30 }}></View>
           <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.M.U</Text>

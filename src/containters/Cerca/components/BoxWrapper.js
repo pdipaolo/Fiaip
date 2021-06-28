@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-      height: 140,
+      height: ITEM_WIDTH/3,
       paddingLeft: 10,
       paddingRight: 10,
       paddingBottom: 20,

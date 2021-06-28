@@ -11,6 +11,7 @@ import {
     StyleSheet,
     ScrollView,
     Dimensions,
+    Alert
   } from 'react-native';
 
 import { 
@@ -42,7 +43,7 @@ import {
 
 
   const SLIDER_WIDTH = Dimensions.get('window').width;
-  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+  const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 
   const styles = StyleSheet.create({  
     safeArea: {
@@ -98,6 +99,7 @@ function HomeScreen({ navigation }) {
     const isFocused = useIsFocused();
 
     const renderItem2 = ({item}) => {
+      
       return renderItem(item,navigation)
     }
 
@@ -109,8 +111,9 @@ function HomeScreen({ navigation }) {
             for (let i = 0; i < res.rows.length; ++i) {
               resArray.push({id:res.rows.item(i).dossier_id, obj: JSON.parse( res.rows.item(i).dossier_obj)})
             }
-
-            setcarouselItems(resArray)
+          const array = resArray.reverse().splice(0,10)
+         
+            setcarouselItems(array)
         });
     })
     //   var db = SQLite.openDatabase({
@@ -167,8 +170,9 @@ function HomeScreen({ navigation }) {
       position => {
         const initialPosition = JSON.stringify(position);
         Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
-        // Geocoder.from(position.coords.latitude, position.coords.longitude)
-        Geocoder.from('40.87682047278474', '15.185810238033884')
+        
+        Geocoder.from(position.coords.latitude, position.coords.longitude)
+        // Geocoder.from('40.87682047278474', '15.185810238033884')
             .then(json => {
                 var addressComponent = json.results[0].formatted_address
                 setGeolocalization(addressComponent)
@@ -178,8 +182,8 @@ function HomeScreen({ navigation }) {
                 console.warn("error",error)
             );
       },
-      error => Alert.alert('Error', JSON.stringify(error)),
-      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+      // error => Alert.alert('Errore', 'Localizazione non permessa'),
+      // {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
 
 
@@ -188,16 +192,16 @@ function HomeScreen({ navigation }) {
           <View style={{padding:20}}>
             <Text style={styles.text}>Ricerca Rapida Quotazioni</Text>
           </View>
-          <View style={{ flexDirection: "row", justifyContent:'center', padding: 10 , height: 160}}> 
-            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:0})} value={false}>
+          <View style={{ flexDirection: "row", justifyContent:'center', padding: 10 , height: ITEM_WIDTH/3}}> 
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:0, address:''})} value={false} height={ITEM_WIDTH/3}>
               <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Residenziale</ButtonText>
             </ButtonContainer>
-            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:1})} value={false}>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:1, address:''})} value={false} height={ITEM_WIDTH/3}>
               <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Commerciale</ButtonText>
             </ButtonContainer>
-            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:2})} value={false}>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:2, address:''})} value={false} height={ITEM_WIDTH/3}>
               <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Box Auto</ButtonText>
             </ButtonContainer>
@@ -212,13 +216,13 @@ function HomeScreen({ navigation }) {
               <ButtonTextLocalization color={lightblue} fontSize="13px" align="flex-start">Geolocalizzato in:</ButtonTextLocalization>
               <ButtonTextLocalization color={primaryColor} fontSize="12px" align="flex-start">{geolocalization}</ButtonTextLocalization>
             </ButtonLocalization>
-            <ButtonLocalization style={{flex: 0.5}} color={primaryColor}>
+            <ButtonLocalization style={{flex: 0.5}} color={primaryColor} onPress={()=> navigation.navigate('Cerca', {address:geolocalization})}>
               <ButtonTextLocalization color={white} fontSize="14px" align="center">Avvia Ricerca</ButtonTextLocalization>
             </ButtonLocalization>
           </View>
         </View>
 
-        <View style={{marginBottom: 60, padding: 0}}> 
+        <View style={{marginBottom: 20, paddingTop: 16,paddingBottom:16, height:500}}> 
           <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={styles.swipertext}>Ultimi fascicoli</Text>
             <ButtonMoreScheda>
@@ -232,7 +236,7 @@ function HomeScreen({ navigation }) {
                   sliderWidth={SLIDER_WIDTH}
                   itemWidth={ITEM_WIDTH}
                   renderItem={renderItem2}
-                  sliderHeight={300}
+                 
           />
         </View>
       </ScrollView>

@@ -1,9 +1,10 @@
 
 import {
     StyleSheet,
+    Dimensions
   } from 'react-native';
 import { grey, primaryColor, white } from '../../constants/Colors';
-
+const SLIDER_WIDTH = Dimensions.get('window').width;
 const styles = StyleSheet.create({ 
     text: {
         color: primaryColor,
@@ -79,6 +80,12 @@ const styles = StyleSheet.create({
       marginBottom: 16,
       marginTop: 16,
       height: 240
+    },
+    containerViewButton: {
+      width: SLIDER_WIDTH,
+      flexDirection: 'row',
+      margin: 16,
+      height: 80,
     },
     containerButton:{
       flexDirection: 'row',
@@ -180,7 +187,7 @@ const styles = StyleSheet.create({
 
     },
     locativaText:{
-      fontSize:16,
+      fontSize:14,
       fontWeight:'bold',
       textAlign:'center',
       paddingTop:6

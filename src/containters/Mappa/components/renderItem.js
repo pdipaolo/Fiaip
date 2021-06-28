@@ -6,6 +6,7 @@ import {
   View,
   StyleSheet,
   FlatList,
+  Dimensions
 } from 'react-native';
 
 import {
@@ -60,54 +61,58 @@ const styles = StyleSheet.create({
     color: primaryColor
   }
 });
-export default function renderItem(item, navigation) {
- 
+
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
+
+export default function renderItem(item,index, navigation) {
+  const municipalitaIndex = index
   const boxShadow = {
-    width: 330,
-    height: 370,
-    color: "#555",
-    border: 10,
-    radius: 10,
-    opacity: 0.3,
-    x: 2,
-    y: 10,
+    width: ITEM_WIDTH,
+    height:ITEM_WIDTH,
+    color:"#555",
+    border:10,
+    radius:10,
+    opacity:0.3,
+    x:2,
+    y:10,  
   };
   const switchImage = (id) =>{
   switch (id) {
     case "1":
-      return <V1 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V1 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "2":
-      return <V2 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V2 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "3":
-      return <V3 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V3 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "4":
-      return <V4 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V4 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "5":
-      return <V5 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V5 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "6":
-      return <V6 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V6 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "7":
-      return <V7 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V7 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "8":
-      return <V8 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V8 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "9":
-      return <V9 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V9 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     case "10":
-      return <V10 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V10 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
     default:
-      return <V1 style={{ marginTop: 10, marginRight: 20 }} width={60} height={60} />
+      return <V1 style={{ marginTop: 5, marginRight: 20 }} width={50} height={50} />
   }
 }
 
   return (
     <BoxShadow setting={boxShadow}>
       <View style={{
-        flexDirection: 'column',
-        justifyContent: 'space-evenly',
-        backgroundColor: white,
-        borderRadius: 5,
-        height: 370,
-        marginTop: 5,
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              backgroundColor:white,
+              borderRadius: 10,
+              height: ITEM_WIDTH,
+              marginTop:5,
       }}>
         <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between', backgroundColor: primaryColor }}>
           <Text style={styles.textTitle}>Municipalità N°{item.Numero}</Text>
@@ -117,7 +122,7 @@ export default function renderItem(item, navigation) {
           <FlatList
             data={item.Quartieri}
             initialNumToRender={50}
-            renderItem={({ item, index }) => <RowWrapper item={item} index={index} navigation={navigation} />}
+            renderItem={({ item, index }) => <RowWrapper item={item} index={index} munIndex={municipalitaIndex} navigation={navigation} />}
             keyExtractor={(item,index)=> index.toString()}
           />
         </View>

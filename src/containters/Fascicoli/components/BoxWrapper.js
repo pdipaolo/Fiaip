@@ -14,6 +14,7 @@ import {
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+const ITEM_HEIGHT = Math.round(SLIDER_WIDTH * 0.89);
 
 const shadowOpt = {
     width: ITEM_WIDTH,
@@ -44,10 +45,11 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-      height: 140,
+      height: ITEM_HEIGHT/3,
       paddingLeft: 10,
       paddingRight: 10,
       paddingBottom: 20,
+      
     },
     image:{
       justifyContent: 'center',
