@@ -113,12 +113,13 @@ export default function renderItem(item,index, navigation) {
               borderRadius: 10,
               height: ITEM_WIDTH,
               marginTop:5,
+              paddingBottom:8
       }}>
-        <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between', backgroundColor: primaryColor }}>
+        <View style={{ flex: 0.15, flexDirection: "row", justifyContent: 'space-between', backgroundColor: primaryColor }}>
           <Text style={styles.textTitle}>Municipalità N°{item.Numero}</Text>
           {switchImage(item.Numero)}
         </View>
-        <View style={{ flex: 0.8, flexDirection: "row", justifyContent: 'space-between' }}>
+        <View style={{ flex: 0.85, flexDirection: "row", justifyContent: 'space-between' }}>
           <FlatList
             data={item.Quartieri}
             initialNumToRender={50}
