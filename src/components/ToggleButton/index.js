@@ -16,7 +16,13 @@ margin: 10px;
 background-color: ${white};
 justify-content: center;
 align-items: center;
-shadow-radius: 2px;
+shadowColor: rgb(0,0,0);
+shadowOffset: {
+	width: 0,
+	height: 2,
+};
+shadowOpacity: ${(props) => props.value ? 0 : 0.25};
+shadowRadius: 3.84;
 `;
 
 const ButtonText = styled.Text`

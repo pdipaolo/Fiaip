@@ -11,9 +11,11 @@ import {
     StyleSheet,
     ScrollView,
     Dimensions,
-    Alert
+    Alert, 
+    TouchableWithoutFeedback
   } from 'react-native';
 
+import styles from './styles';
 import { 
     white,
     lightblue,
@@ -25,11 +27,6 @@ import {
     ButtonContainer,
     ButtonText,
   } from '../../components/ToggleButton';
-
-  import {
-    ButtonLocalization,
-    ButtonTextLocalization,
-  } from './components/Localizzazione';
 
   import { 
     ButtonMoreScheda,
@@ -45,50 +42,6 @@ import {
   const SLIDER_WIDTH = Dimensions.get('window').width;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 
-  const styles = StyleSheet.create({  
-    safeArea: {
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 50
-  },
-    container: {
-      flex: 1,
-      padding: 0,
-      backgroundColor: white,
-    },
-    quotazioni:{
-      height: 110,
-    },
-    localizzazione:{
-      height: 60,
-    },
-    image:{
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 40,
-      height: 40,
-    },
-    text:{
-      fontSize:18,
-      fontWeight: 'bold',
-      color: primaryColor,
-    },
-    geotext:{
-      fontSize:18,
-      fontWeight: 'bold',
-      color: primaryColor,
-      marginTop: 14,
-      marginBottom: 14,
-    },
-    swipertext:{
-      fontSize:18,
-      fontWeight: 'bold',
-      color: primaryColor,
-      marginTop: 14,
-      marginLeft: 20,
-    },
-  });
 
   
 function HomeScreen({ navigation }) {
@@ -116,46 +69,15 @@ function HomeScreen({ navigation }) {
             setcarouselItems(array)
         });
     })
-    //   var db = SQLite.openDatabase({
-    //     name: 'FiaipAppTest.db', createFromLocation: '../../db/FiaipAppTest2.db', },
-    //     () => {},
-    //     error => {
-    //       // TODO: Insert alert if db not work
-    //       //  console.log("error while opening DB: " + error);
-    //     });
-    //   db.transaction(function (txn) {
-    //     // // Drop the table if it exists
-    //     // txn.executeSql('DROP TABLE IF EXISTS Users', []);
-    
-    //     // // Create the table and define the properties of the columns
-    //     // txn.executeSql('CREATE TABLE IF NOT EXISTS Users(user_id INTEGER PRIMARY KEY NOT NULL, name VARCHAR(30))', []);
-    
-    //     // // Insert a record
-    //     // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['nora']);
-    
-    //     // // Insert another record
-    //     // txn.executeSql('INSERT INTO Users (name) VALUES (:name)', ['takuya']);
-    
-    //     // Select all inserted records, loop over them while printing them on the console.
-    //     txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
-    //       console.log("Query completed");
-    //         let resArray = []
-    //         for (let i = 0; i < res.rows.length; ++i) {
-    //           resArray.push(res.rows.item(i))
-    //         }
-    //         setcarouselItems(resArray)
-    //     });
-    
-    // });
     },[isFocused])
 
     async function requestPermissions() {
       if (Platform.OS === 'ios') {
-        Geolocation.requestAuthorization();
-        Geolocation.setRNConfiguration({
-          skipPermissionRequests: false,
-         authorizationLevel: 'whenInUse',
-       });
+      //   Geolocation.requestAuthorization();
+      //   Geolocation.setRNConfiguration({
+      //     skipPermissionRequests: false,
+      //    authorizationLevel: 'whenInUse',
+      //  });
       }
     
       if (Platform.OS === 'android') {
@@ -212,13 +134,15 @@ function HomeScreen({ navigation }) {
             <Text style={styles.geotext}>Ricerca in base alla posizione attuale</Text>
           </View>
           <View style={[styles.localizzazione,{ flexDirection: "row", justifyContent:'center' }]}> 
-            <ButtonLocalization style={{flex: 0.5}} color={white}>
-              <ButtonTextLocalization color={lightblue} fontSize="13px" align="flex-start">Geolocalizzato in:</ButtonTextLocalization>
-              <ButtonTextLocalization color={primaryColor} fontSize="12px" align="flex-start">{geolocalization}</ButtonTextLocalization>
-            </ButtonLocalization>
-            <ButtonLocalization style={{flex: 0.5}} color={primaryColor} onPress={()=> navigation.navigate('Cerca', {address:geolocalization})}>
-              <ButtonTextLocalization color={white} fontSize="14px" align="center">Avvia Ricerca</ButtonTextLocalization>
-            </ButtonLocalization>
+            <View style={styles.geolocalitationFirstView}>
+              <Text style={styles.geolocalitationInText}>Geolocalizzato in:</Text>
+              <Text style={styles.geolocalitationText}>{geolocalization}</Text>
+            </View>
+            <TouchableWithoutFeedback onPress={()=> navigation.navigate('Cerca', {address:geolocalization})}>
+              <View style={styles.geolocalitationSecondView}>
+                <Text style={styles.geolocalitationAvvia}>Avvia Ricerca</Text>
+              </View>
+            </TouchableWithoutFeedback>
           </View>
         </View>
 
