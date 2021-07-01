@@ -25,7 +25,7 @@ import {
 } from 'react-native';
 
 import { primaryColor, white } from '../constants/Colors';
-
+import SplashScreen from  "react-native-splash-screen"; 
 
 const Stack = createStackNavigator();
 
@@ -48,7 +48,10 @@ const App = () => {
     },
     headerTintColor: white,
   };
-
+  
+  React.useEffect(() => {
+    SplashScreen.hide();
+  });
   return (
     <NavigationContainer>
       <StatusBar

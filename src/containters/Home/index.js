@@ -14,11 +14,10 @@ import SearchIcon from '../../assets/images/search.svg';
 import UserIcon from '../../assets/images/user.svg';
 
 import { primaryColor, grey} from '../../constants/Colors'
-
 const Tab = createBottomTabNavigator();
 
 function Home() {
-  
+
     return (    
         <Tab.Navigator
           screenOptions={({ route }) => ({
