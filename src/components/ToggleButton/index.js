@@ -6,6 +6,21 @@ import {
     primaryColor, 
   } from '../../constants/Colors';
 
+<<<<<<< HEAD
+=======
+const ButtonContainer = styled.TouchableOpacity`
+elevation: ${(props) => props.value ? 1 : 12};
+height: ${(props) => props.height};
+border-radius: 2px;
+padding-vertical: 4px;
+padding-horizontal: 4px;
+margin: 10px;
+background-color: ${white};
+justify-content: center;
+align-items: center;
+shadow-radius: 2px;
+`;
+>>>>>>> parent of 1dc29413... ios fix
 
 const toggleStyles = StyleSheet.create({
   buttonContainer : (value,height) => ({
