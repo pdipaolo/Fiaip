@@ -8,20 +8,30 @@ import { useIsFocused } from "@react-navigation/native";
 import {
     Text,
     View,
+    StyleSheet,
     ScrollView,
     Dimensions,
+    Alert, 
     TouchableWithoutFeedback
   } from 'react-native';
 
 import styles from './styles';
 import { 
+    white,
+    lightblue,
+    primaryColor,
     secondaryColorOpacity 
   } from '../../constants/Colors';
 
   import {
-    toggleStyles
+    ButtonContainer,
+    ButtonText,
   } from '../../components/ToggleButton';
 
+  import { 
+    ButtonMoreScheda,
+    ButtonTextMoreScheda
+  } from './components/More scheda';
 
   import renderItem from './components/Fascicoli/index';
   import CarIcon from '../../assets/images/car.svg';
@@ -35,7 +45,7 @@ import {
 
   
 function HomeScreen({ navigation }) {
-    const [geolocalization, setGeolocalization] = useState(null)
+    const [geolocalization, setGeolocalization] = useState('Nessuna posizione trovata')
     const [carouselItems, setcarouselItems] = useState(undefined);
     const db = SQLite.openDatabase({ name: 'FiaipDB.db' });
     
@@ -63,12 +73,11 @@ function HomeScreen({ navigation }) {
 
     async function requestPermissions() {
       if (Platform.OS === 'ios') {
-        const auth = await Geolocation.requestAuthorization("whenInUse");
-        if(auth === "granted") {
-          Geolocation.setRNConfiguration({ authorizationLevel : "whenInUse" });
-        Geolocation.requestAuthorization();
-
-      }
+      //   Geolocation.requestAuthorization();
+      //   Geolocation.setRNConfiguration({
+      //     skipPermissionRequests: false,
+      //    authorizationLevel: 'whenInUse',
+      //  });
       }
     
       if (Platform.OS === 'android') {
@@ -106,24 +115,18 @@ function HomeScreen({ navigation }) {
             <Text style={styles.text}>Ricerca Rapida Quotazioni</Text>
           </View>
           <View style={{ flexDirection: "row", justifyContent:'center', padding: 10 , height: ITEM_WIDTH/3}}> 
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('Cerca', {type:0, address:''})}>
-              <View style={[toggleStyles.buttonContainer(false,ITEM_WIDTH/3), {flex: 0.33}]}>
-                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Residenziale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('Cerca', {type:1, address:''})}>
-              <View style={[toggleStyles.buttonContainer(false,ITEM_WIDTH/3), {flex: 0.33}]}>
-                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Commerciale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => navigation.navigate('Cerca', {type:2, address:''})}>
-              <View style={[toggleStyles.buttonContainer(false,ITEM_WIDTH/3), {flex: 0.33}]}>
-                <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Box Auto</Text>
-              </View>
-            </TouchableWithoutFeedback>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:0, address:''})} value={false} height={ITEM_WIDTH/3}>
+              <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+              <ButtonText>Residenziale</ButtonText>
+            </ButtonContainer>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:1, address:''})} value={false} height={ITEM_WIDTH/3}>
+              <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+              <ButtonText>Commerciale</ButtonText>
+            </ButtonContainer>
+            <ButtonContainer style={{flex: 0.33}} onPress={() => navigation.navigate('Cerca', {type:2, address:''})} value={false} height={ITEM_WIDTH/3}>
+              <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+              <ButtonText>Box Auto</ButtonText>
+            </ButtonContainer>
           </View>
         
         <View style={{padding: 20}}> 
@@ -133,9 +136,9 @@ function HomeScreen({ navigation }) {
           <View style={[styles.localizzazione,{ flexDirection: "row", justifyContent:'center' }]}> 
             <View style={styles.geolocalitationFirstView}>
               <Text style={styles.geolocalitationInText}>Geolocalizzato in:</Text>
-              <Text style={styles.geolocalitationText}>{geolocalization ? geolocalization : 'Nessuna posizione trovata'}</Text>
+              <Text style={styles.geolocalitationText}>{geolocalization}</Text>
             </View>
-            <TouchableWithoutFeedback onPress={()=> geolocalization ? navigation.navigate('Cerca', {address:geolocalization}) : null}>
+            <TouchableWithoutFeedback onPress={()=> navigation.navigate('Cerca', {address:geolocalization})}>
               <View style={styles.geolocalitationSecondView}>
                 <Text style={styles.geolocalitationAvvia}>Avvia Ricerca</Text>
               </View>
@@ -146,11 +149,9 @@ function HomeScreen({ navigation }) {
         <View style={{marginBottom: 20, paddingTop: 16,paddingBottom:16, height:500}}> 
           <View style={{ flex: 1, flexDirection: "row", justifyContent: 'space-between'}}>
             <Text style={styles.swipertext}>Ultimi fascicoli</Text>
-              <TouchableWithoutFeedback onPress={()=> navigation.navigate('New Dossier', {data:null,id:null, navigation: navigation})}>
-                <View style={styles.buttonMoreScheda}>
-                  <Text style={styles.buttonMoreText}>+ Crea fascicolo</Text>
-                </View>
-              </TouchableWithoutFeedback>
+            <ButtonMoreScheda>
+              <ButtonTextMoreScheda onPress={()=> navigation.navigate('New Dossier', {data:null,id:null, navigation: navigation})}>+ Crea fascicolo</ButtonTextMoreScheda>
+            </ButtonMoreScheda>
           </View>
           <Carousel
                   layout={"default"}

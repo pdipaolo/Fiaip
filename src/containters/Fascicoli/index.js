@@ -3,9 +3,7 @@ import {
   FlatList,
   Dimensions,
   TextInput,
-  View, 
-  Text,
-  TouchableWithoutFeedback
+  View
 } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 import { RowWrapper } from './components/RowWrapper';
@@ -17,7 +15,8 @@ import {
 } from '../../constants/Colors';
 
 import {
-  toggleStyles
+  ButtonContainer,
+  ButtonText,
 } from '../../components/ToggleButton';
 import SQLite from 'react-native-sqlite-storage';
 
@@ -30,6 +29,8 @@ import NewdossierIcon from '../../assets/images/newdossier.svg';
 import {
   shadowOpt,
   styles,
+  ProvContainer,
+  ProvText,
   shadowLine,
 } from './components/BoxWrapper';
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -57,9 +58,15 @@ function Fascicoli({navigation}) {
           setDataList(resArray)
           setData(resArray) 
       });
-    })
+  })
+  
+    // const result = dataList?.filter(x => { return (x.obj.indirizzo.toLowerCase().includes(text.toLowerCase())) && x.obj.tipology == buttonType && x.obj.city == provType})
+    // setData(result)
   }
 
+  // React.useEffect(()=>{
+  //   searchText()
+  // }, [])
   React.useEffect(()=>{
     
     searchText()
@@ -69,11 +76,24 @@ function Fascicoli({navigation}) {
     searchText()
   }, [provType])
 
+  // React.useEffect(() => {
+  //   route.params?.type ? setButtonType(route.params?.type) : setButtonType(0)
+  //   // setButtonType(route.params?.type)
+  // }, [route.params?.type]);
+
   React.useEffect(() => {
       searchText()
   }, [text]);
 
+  React.useEffect(()=>{
+    console.log("ciao");
 
+  },[isFocused])
+
+  // React.useEffect(() => {
+  //    const result = dataList?.filter(x => x.obj.indirizzo.toLowerCase().includes(text.toLowerCase()))
+  //     setData(result)
+  // }, [text]);
 
   return (
     <View style={{  height: '100%', paddingTop: 30, backgroundColor: white }}>
@@ -95,37 +115,27 @@ function Fascicoli({navigation}) {
           <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={()=> navigation.navigate('New Dossier',{data:null,id:null, navigation: navigation})} />  
         </View>
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: white }]}>
-          <TouchableWithoutFeedback onPress={() => setButtonType(0)}>
-              <View style={[toggleStyles.buttonContainer(buttonType === 0 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
-                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Residenziale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => setButtonType(1)}>
-              <View style={[toggleStyles.buttonContainer(buttonType === 1 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
-                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Commerciale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => setButtonType(2)}>
-              <View style={[toggleStyles.buttonContainer(buttonType === 2 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
-                <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Box Auto</Text>
-              </View>
-            </TouchableWithoutFeedback>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(0)} value={buttonType === 0 ? true : false} height={ITEM_WIDTH/3}>
+            <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
+            <ButtonText>Residenziale</ButtonText>
+          </ButtonContainer>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(1)} value={buttonType === 1 ? true : false} height={ITEM_WIDTH/3}>
+            <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
+            <ButtonText>Commerciale</ButtonText>
+          </ButtonContainer>
+          <ButtonContainer style={{ flex: 0.33,height:'100%' }} onPress={() => setButtonType(2)} value={buttonType === 2 ? true : false} height={ITEM_WIDTH/3}>
+            <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
+            <ButtonText>Box Auto</ButtonText>
+          </ButtonContainer>
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10,backgroundColor: '#fff' }}>
-          <TouchableWithoutFeedback onPress={() => setProvType(0)}>
-            <View style={[styles.provContainer(provType===0?true:false),{ flex: 0.50}]} >
-              <Text style={styles.provText(provType===0?true:false)}>Napoli</Text>            
-            </View>
-          </TouchableWithoutFeedback>
-          <TouchableWithoutFeedback onPress={() => setProvType(1)}>
-            <View style={[styles.provContainer(provType===1?true:false),{ flex: 0.50}]} >
-              <Text style={styles.provText(provType===1?true:false)}>Provincia</Text>
-            </View>
-          </TouchableWithoutFeedback>
+          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(0)} value={provType === 0 ? true : false}>
+            <ProvText value={provType === 0 ? true : false}>Napoli</ProvText>
+          </ProvContainer>
+          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(1)} value={provType === 1 ? true : false}>
+            <ProvText value={provType === 1 ? true : false}>Provincia</ProvText>
+          </ProvContainer>
         </View>
 
         <BoxShadow setting={shadowLine}>

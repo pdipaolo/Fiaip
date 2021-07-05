@@ -20,7 +20,7 @@ function MapImage() {
         <View style={{width:'100%',flex:0.5}}>
 
             <V1 style={{position: 'absolute', top: 175, left: 120 , zIndex:10}} onPress={() => {
-              
+              console.log('onPress rect1');
             }}/>
         
           <V2 style={{position: 'absolute', top: 142, left: 230}}/>
@@ -32,7 +32,7 @@ function MapImage() {
           <V8 style={{position: 'absolute', top: 0, left: 140}}/>
           <V9 style={{position: 'absolute', top: 100, left: 50}}/>
           <V10 style={{position: 'absolute', top: 170, left: 80 , zIndex:10}} onPress={() => {
-              
+              console.log('onPress rect10');
             }}/>
           
         </View>
