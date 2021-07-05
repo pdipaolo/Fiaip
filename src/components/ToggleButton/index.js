@@ -1,38 +1,39 @@
-import styled from "styled-components";
+import {
+  StyleSheet,
+} from 'react-native';
 import {
     white,
     primaryColor, 
-    secondaryColor, 
-    secondaryColorOpacity 
   } from '../../constants/Colors';
 
-const ButtonContainer = styled.TouchableOpacity`
-elevation: ${(props) => props.value ? 1 : 12};
-height: ${(props) => props.height};
-border-radius: 2px;
-padding-vertical: 4px;
-padding-horizontal: 4px;
-margin: 10px;
-background-color: ${white};
-justify-content: center;
-align-items: center;
-shadowColor: rgb(0,0,0);
-shadowOffset: {
-	width: 0,
-	height: 2,
-};
-shadowOpacity: ${(props) => props.value ? 0 : 0.25};
-shadowRadius: 3.84;
-`;
 
-const ButtonText = styled.Text`
-font-size: 14px;
-color: ${primaryColor};
-align-self: center;
-margin-top: 8px;
-`;
+const toggleStyles = StyleSheet.create({
+  buttonContainer : (value,height) => ({
+    elevation: value?1:12,
+    height:height,
+    borderRadius: 2,
+    paddingVertical: 4,
+    paddingHorizontal: 4,
+    margin: 10,
+    backgroundColor: white,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowRadius: 3.84,
+    shadowOpacity: value ? 0 : 0.25,
+    justifyContent: 'center',
+    alignItems: 'center',
+  }),
+  buttonText:{
+    fontSize: 14,
+    color: primaryColor,
+    alignSelf: 'center',
+    marginTop: 8,
+  }
+});
 
 export {
-    ButtonContainer,
-    ButtonText,
+    toggleStyles
 };

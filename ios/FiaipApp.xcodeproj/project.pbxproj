@@ -12,6 +12,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		463FA070820F90A80327565C /* libPods-FiaipApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C62E720A68BB583F765429D1 /* libPods-FiaipApp.a */; };
+		5D81D02A268E0A41000956A9 /* SFProDisplay-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D028268E09D4000956A9 /* SFProDisplay-Bold.otf */; };
+		5D81D02B268E0A44000956A9 /* SFProDisplay.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D029268E0A2A000956A9 /* SFProDisplay.otf */; };
+		5D81D02D268E0BC7000956A9 /* LucidaGrande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5D81D02C268E0BC7000956A9 /* LucidaGrande.ttf */; };
+		5DFCE0E5268E1B2C0047A39D /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DFCE0E4268E1B2C0047A39D /* MapKit.framework */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		EA1E3A7491417D7D8D8CB62A /* libPods-FiaipApp-FiaipAppTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 96CED096F8EB20CA6B4FF8C2 /* libPods-FiaipApp-FiaipAppTests.a */; };
 /* End PBXBuildFile section */
@@ -37,6 +41,10 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = FiaipApp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = FiaipApp/main.m; sourceTree = "<group>"; };
 		2E5E2D0D09CF6B1DA25986CF /* Pods-FiaipApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiaipApp.debug.xcconfig"; path = "Target Support Files/Pods-FiaipApp/Pods-FiaipApp.debug.xcconfig"; sourceTree = "<group>"; };
+		5D81D028268E09D4000956A9 /* SFProDisplay-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SFProDisplay-Bold.otf"; sourceTree = "<group>"; };
+		5D81D029268E0A2A000956A9 /* SFProDisplay.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = SFProDisplay.otf; sourceTree = "<group>"; };
+		5D81D02C268E0BC7000956A9 /* LucidaGrande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = LucidaGrande.ttf; sourceTree = "<group>"; };
+		5DFCE0E4268E1B2C0047A39D /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		63B1FB7C6592D90FBF4D07F9 /* Pods-FiaipApp-FiaipAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiaipApp-FiaipAppTests.debug.xcconfig"; path = "Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = FiaipApp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9251E6A497128E65629ACF3F /* Pods-FiaipApp-FiaipAppTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiaipApp-FiaipAppTests.release.xcconfig"; path = "Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DFCE0E5268E1B2C0047A39D /* MapKit.framework in Frameworks */,
 				463FA070820F90A80327565C /* libPods-FiaipApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -99,6 +108,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5DFCE0E4268E1B2C0047A39D /* MapKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				C62E720A68BB583F765429D1 /* libPods-FiaipApp.a */,
 				96CED096F8EB20CA6B4FF8C2 /* libPods-FiaipApp-FiaipAppTests.a */,
@@ -116,6 +126,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				5D81D028268E09D4000956A9 /* SFProDisplay-Bold.otf */,
+				5D81D02C268E0BC7000956A9 /* LucidaGrande.ttf */,
+				5D81D029268E0A2A000956A9 /* SFProDisplay.otf */,
 				13B07FAE1A68108700A75B9A /* FiaipApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* FiaipAppTests */,
@@ -240,8 +253,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D81D02A268E0A41000956A9 /* SFProDisplay-Bold.otf in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
+				5D81D02D268E0BC7000956A9 /* LucidaGrande.ttf in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				5D81D02B268E0A44000956A9 /* SFProDisplay.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

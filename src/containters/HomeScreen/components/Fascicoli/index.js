@@ -3,58 +3,15 @@ import {BoxShadow} from 'react-native-shadow'
 import {
     Text,
     View,
-    StyleSheet,
     TouchableWithoutFeedback,
     Dimensions
   } from 'react-native';
 import {switchImage} from '../../../../utils/switchIcon';
 import { 
     white,
-    secondaryColorOpacity, 
-    primaryColor,
-    secondaryColor
   } from '../../../../constants/Colors';
 
-  import HomeIcon from '../../../../assets/images/home.svg';
-  import CarIcon from '../../../../assets/images/car.svg';
-  import BagIcon from '../../../../assets/images/bag.svg';
-  const styles = StyleSheet.create({  
-    image:{
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 40,
-      height: 40,
-      flex: 0.1,
-    },
-    textTitle:{
-      fontSize: 20,
-      color: primaryColor,
-      fontWeight: 'bold',
-      flex: 0.9
-    },
-    textCity:{
-      fontSize: 16,
-      color: primaryColor,
-      top: -8
-    },
-    typeText: {
-      fontSize: 18,
-      color: secondaryColor,
-      fontWeight: 'bold',
-      flex: 0.65,
-    },
-    statusText: {
-      fontWeight:'bold',
-      fontSize: 16,
-      color: primaryColor,
-      flex: 0.35,
-      textAlign: 'right'
-    },
-    descriptionText: {
-      fontSize: 18,
-      color: primaryColor
-    }
-  });
+import styles from './styles'
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.75);
