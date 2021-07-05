@@ -1,16 +1,12 @@
 import React from 'react';
 import {
-    Text,
-    ScrollView,
     View,
   } from 'react-native';
-
+  import VideoPlayer from 'react-native-video-controls';
   function ChiSiamo(){
       return(
-          <View>
-              <Text>
-                  Chi siamo!
-              </Text>
+          <View style={{flexDirection:'column', height:'100%'}}>  
+            <VideoPlayer source={require('../../assets/video/fiaip_video.mp4')} disableBack={true}/>
           </View>
       );
   };

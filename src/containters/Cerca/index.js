@@ -4,9 +4,12 @@ import {
   Text,
   TextInput,
   View,
-  Dimensions
+  Dimensions,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
+import { BoxShadow } from 'react-native-shadow';
+
 import { RowWrapper } from './components/RowWrapper';
 import {
   primaryColor,
@@ -16,24 +19,22 @@ import {
 } from '../../constants/Colors';
 
 import {
-  ButtonContainer,
-  ButtonText,
+  toggleStyles,
 } from '../../components/ToggleButton';
 
-import { BoxShadow } from 'react-native-shadow';
+
+import {
+  shadowOpt,
+  styles,
+  shadowLine,
+} from './components/BoxWrapper';
+
 import CarIcon from '../../assets/images/car.svg'
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
 import SearchIcon from '../../assets/images/search.svg';
-import {
-  shadowOpt,
-  styles,
-  ProvContainer,
-  ProvText,
-  shadowLine,
-} from './components/BoxWrapper';
-
 import json from '../../dati/dataRicerca.json';
+
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 function Cerca(props) {
@@ -91,27 +92,38 @@ function Cerca(props) {
         </View>
 
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: '#fff' }]}>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(0)}} value={buttonType === 0 ? true : false} height={ITEM_WIDTH/3}>
-            <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Residenziale</ButtonText>
-          </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false} height={ITEM_WIDTH/3}>
-            <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Commerciale</ButtonText>
-          </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false} height={ITEM_WIDTH/3}>
-            <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Box Auto</ButtonText>
-          </ButtonContainer>
+
+          <TouchableWithoutFeedback onPress={() => setButtonType(0)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 0 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Residenziale</Text>
+              </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => setButtonType(1)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 1 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Commerciale</Text>
+              </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => setButtonType(2)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 2 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Box Auto</Text>
+              </View>
+          </TouchableWithoutFeedback>
         </View>
 
         <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10,backgroundColor: '#fff' }}>
-          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(0)} value={provType === 0 ? true : false}>
-            <ProvText value={provType === 0 ? true : false}>Napoli</ProvText>
-          </ProvContainer>
-          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(1)} value={provType === 1 ? true : false}>
-            <ProvText value={provType === 1 ? true : false}>Provincia</ProvText>
-          </ProvContainer>
+          <TouchableWithoutFeedback onPress={() => setProvType(0)}>
+              <View style={[styles.provContainer(provType===0?true:false),{ flex: 0.50}]} >
+                <Text style={styles.provText(provType===0?true:false)}>Napoli</Text>            
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => setProvType(1)}>
+              <View style={[styles.provContainer(provType===1?true:false),{ flex: 0.50}]} >
+                <Text style={styles.provText(provType===1?true:false)}>Provincia</Text>
+              </View>
+            </TouchableWithoutFeedback>
         </View>
 
         <BoxShadow setting={shadowLine}>
