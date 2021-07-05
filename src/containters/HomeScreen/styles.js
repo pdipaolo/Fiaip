@@ -102,19 +102,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         textAlign: 'center',
         fontWeight: 'bold',
-    },
-    buttonMoreScheda: {
-        elevation: 0,
-        height: 20,
-        backgroundColor: 'transparent',
-        borderColor: 'transparent',
-        borderWidth: 0,
-        marginTop: 16
-    },
-    buttonMoreText:{
-        marginRight: 20,
-        fontSize: 16,
-        color: lightblue,
     }
   });
 

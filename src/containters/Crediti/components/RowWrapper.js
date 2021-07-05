@@ -21,7 +21,7 @@ import RightArrow from '../../../assets/images/right-arrow.svg';
             <View style={{flex: 0.2}}>
                 {image}
             </View>
-            <Text style={{color: white, fontSize: 19, flex: 0.8, paddingLeft: 24,paddingTop:5}}>
+            <Text style={{color: white, fontSize: 24, flex: 0.8, paddingLeft: 30,paddingTop:5}}>
                 {text}
             </Text>
             <RightArrow width={20} height={20} fill={white} paddingVertical={20}/>

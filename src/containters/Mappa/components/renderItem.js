@@ -121,7 +121,6 @@ export default function renderItem(item,index, navigation) {
         </View>
         <View style={{ flex: 0.85, flexDirection: "row", justifyContent: 'space-between' }}>
           <FlatList
-            nestedScrollEnabled={true}
             data={item.Quartieri}
             initialNumToRender={50}
             renderItem={({ item, index }) => <RowWrapper item={item} index={index} munIndex={municipalitaIndex} navigation={navigation} />}

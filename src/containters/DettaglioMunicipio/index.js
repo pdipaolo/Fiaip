@@ -1,20 +1,22 @@
 import React from 'react';
 import {
     Text,
+    ScrollView,
     FlatList,
     View,
     StyleSheet,
-    Dimensions,
-    TouchableWithoutFeedback
+    Dimensions
   } from 'react-native';
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
   import {
-    toggleStyles,
+    ButtonContainer,
+    ButtonText,
   } from '../../components/ToggleButton';
 
 import { 
     white,
+    lightblue,
     primaryColor,
     secondaryColorOpacity 
   } from '../../constants/Colors';
@@ -68,6 +70,20 @@ import json from '../../dati/dataRicerca.json';
   const SLIDER_WIDTH = Dimensions.get('window').width;
   const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
  
+  const dataEx = [
+    { Address: 'a',VMU: 1,VLU:1 },
+    { Address: 's',VMU: 2,VLU:2 },
+    { Address: 'd',VMU: 3,VLU:3 },
+    { Address: 'f',VMU: 4,VLU:4 },
+    { Address: 'g',VMU: 5,VLU:5 },
+  ]
+  const dataEx2 = [
+    { Address: 'q',VMU: 1,VLU:1 },
+    { Address: 'w',VMU: 2,VLU:2 },
+    { Address: 'e',VMU: 3,VLU:3 },
+    { Address: 'r',VMU: 4,VLU:4 },
+    { Address: 't',VMU: 5,VLU:5 },
+  ]
 function DettaglioFascicoli(props) {
   const {route} = props
   const [value,setValue] = React.useState(false)
@@ -91,26 +107,14 @@ function DettaglioFascicoli(props) {
     return (
       <View style={{flexDirection: 'column',width: SLIDER_WIDTH, height: '100%'}}>
           <View style={{flexDirection: 'row',flex: 0.2, width:260, alignItems: 'center', alignSelf: 'center'}}>
-          <TouchableWithoutFeedback onPress={() => setValue(false)}>
-              <View style={[toggleStyles.buttonContainer(!value,ITEM_WIDTH/3), {flex: 0.5}]}>
-                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Residenziale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => setValue(true)}>
-              <View style={[toggleStyles.buttonContainer(value,ITEM_WIDTH/3), {flex: 0.5}]}>
-                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Commerciale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            {/* <ButtonContainer style={{flex: 0.5}} onPress={() => setValue(false)} value={!value} height={ITEM_WIDTH/3}>
+            <ButtonContainer style={{flex: 0.5}} onPress={() => setValue(false)} value={!value} height={ITEM_WIDTH/3}>
               <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Residenziale</ButtonText>
             </ButtonContainer>
             <ButtonContainer style={{flex: 0.5}} onPress={() => setValue(true)} value={value} height={ITEM_WIDTH/3}>
               <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
               <ButtonText>Commerciale</ButtonText>
-            </ButtonContainer> */}
+            </ButtonContainer>
           </View>
 
           <View style={{ flex: 0.8, flexDirection: "column", justifyContent: 'space-between' }}>

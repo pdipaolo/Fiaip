@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import {
     StyleSheet,
     Dimensions,
@@ -6,7 +7,9 @@ import {
 import {
     white,
     primaryColor,
+    secondaryColor, 
     lightblue,
+    black,
   } from '../../../constants/Colors';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
@@ -78,29 +81,26 @@ const styles = StyleSheet.create({
       fontSize:18,
       paddingBottom: 9
     },
-    provContainer:(value) => ({
-      height: 40,
-      borderRadius:2,
-      paddingHorizontal: 4,
-      paddingVertical: 4,
-      margin: 10,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 2,
-      },
-      shadowRadius: 3.84,
-      justifyContent: 'center',
-      alignContent: 'center',
-      backgroundColor: value ? primaryColor: lightblue,
-      shadowOpacity: value ? 0 : 0.25,
-      elevation: value ? 0 : 5,
-    }),
-    provText: (value)=>({
-      fontSize: 12,
-      color: value ? white : primaryColor,
-      alignSelf: 'center'
-    })
   });
 
-export  { shadowOpt, styles, shadowLine };
+const ProvContainer = styled.TouchableOpacity`
+elevation: ${(props)=>props.value === true ? 0 : 12};
+height: 40;
+border-radius: 2px;
+padding-vertical: 4px;
+padding-horizontal: 4px;
+margin: 10px;
+background-color: ${(props)=> props.value === true ? primaryColor : lightblue};
+shadowColor: ${black};
+shadowOpacity: 0.5;
+justify-content: center;
+align-items: center;
+shadow-radius: 2px;
+`;
+
+const ProvText = styled.Text`
+font-size: 12px;
+color: ${(props)=> props.value === true ? white : primaryColor};
+align-self: center;
+`;
+export  { shadowOpt, styles, ProvContainer, ProvText, shadowLine };
