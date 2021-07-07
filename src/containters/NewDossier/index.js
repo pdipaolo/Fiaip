@@ -7,7 +7,6 @@ import {
     TouchableWithoutFeedback,
     Image,
     Alert,
-    NativeModules,
   } from 'react-native';
   import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import { openDatabase } from 'react-native-sqlite-storage';
@@ -185,6 +184,7 @@ const launchAndroidCamera = () => {
                 <View style={styles.containerCheckBox}>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.postoAuto}
                         onValueChange={(newValue) => setDossier({...dossier, postoAuto: newValue})}
@@ -193,6 +193,7 @@ const launchAndroidCamera = () => {
                     </View>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.riscaldamento}
                         onValueChange={(newValue) => setDossier({...dossier, riscaldamento: newValue})}
@@ -203,6 +204,7 @@ const launchAndroidCamera = () => {
                 <View style={styles.containerCheckBox}>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.balconi}
                         onValueChange={(newValue) => setDossier({...dossier, balconi: newValue})}
@@ -211,6 +213,7 @@ const launchAndroidCamera = () => {
                     </View>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.giardino}
                         onValueChange={(newValue) => setDossier({...dossier, giardino: newValue})}
@@ -221,6 +224,7 @@ const launchAndroidCamera = () => {
                 <View style={styles.containerCheckBox}>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.terrazzi}
                         onValueChange={(newValue) => setDossier({...dossier, terrazzi: newValue})}
@@ -229,6 +233,7 @@ const launchAndroidCamera = () => {
                     </View>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.ascensore}
                         onValueChange={(newValue) => setDossier({...dossier, ascensore: newValue})}
@@ -239,6 +244,7 @@ const launchAndroidCamera = () => {
                 <View style={styles.containerCheckBox}>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.rivestimenti}
                         onValueChange={(newValue) => setDossier({...dossier, rivestimenti: newValue})}
@@ -247,6 +253,7 @@ const launchAndroidCamera = () => {
                     </View>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.pavimenti}
                         onValueChange={(newValue) => setDossier({...dossier, pavimenti: newValue})}
@@ -257,6 +264,7 @@ const launchAndroidCamera = () => {
                 <View style={styles.containerCheckBox}>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.infissiEsterni}
                         onValueChange={(newValue) => setDossier({...dossier, infissiEsterni: newValue})}
@@ -265,6 +273,7 @@ const launchAndroidCamera = () => {
                     </View>
                     <View style={styles.checkBoxView}>
                         <CheckBox
+                        boxType="square"
                         style={styles.checkBox}
                         value={dossier?.infissiInterni}
                         onValueChange={(newValue) => setDossier({...dossier, infissiInterni: newValue})}
@@ -326,8 +335,8 @@ const launchAndroidCamera = () => {
                 <Text style={styles.text}>Contatti</Text>
                 <TextInput value={dossier?.contattiP ? dossier?.contattiP.nome : ''} style={styles.textField} placeholder=' Nome Proprietario' onChangeText={text => setDossier({...dossier, contattiP: {nome: text , numero: dossier?.contattiP ? dossier?.contattiP.numero : ''}})}/> 
                 <TextInput value={dossier?.contattiP ? dossier?.contattiP.numero : ''} style={styles.textFieldContact} placeholder=' Numero telefono Proprietario' onChangeText={text => setDossier({...dossier, contattiP: {nome:dossier?.contattiP ? dossier?.contattiP.nome : '', numero: text}})}/> 
-                <TextInput value={dossier?.contattiLocatario ? dossier.contattiLocatario.nome : ''} style={styles.textField} placeholder='Nome Locatario' onChangeText={text => setDossier({...dossier, contattiLocatario: {nome: text , numero: dossier?.contattiLocatario ? dossier?.contattiP.numero : ''}})}/> 
-                <TextInput value={dossier?.contattiLocatario ? dossier.contattiLocatario.numero : ''} style={styles.textFieldContact} placeholder='Numero telefono Locatario' onChangeText={text => setDossier({...dossier, contattiLocatario: {nome:dossier?.contattiLocatario ? dossier?.contattiP.nome : '', numero: text}})}/> 
+                <TextInput value={dossier?.contattiLocatario ? dossier.contattiLocatario.nome : ''} style={styles.textField} placeholder='Nome Locatario' onChangeText={text => setDossier({...dossier, contattiLocatario: {nome: text , numero: dossier?.contattiLocatario ? dossier?.contattiLocatario.numero : ''}})}/> 
+                <TextInput value={dossier?.contattiLocatario ? dossier.contattiLocatario.numero : ''} style={styles.textFieldContact} placeholder='Numero telefono Locatario' onChangeText={text => setDossier({...dossier, contattiLocatario: {nome:dossier?.contattiLocatario ? dossier?.contattiLocatario.nome : '', numero: text}})}/> 
                 <TextInput value={dossier?.contattiPortiere ? dossier.contattiPortiere.nome : ''} style={styles.textField} placeholder='Nome Portiere' onChangeText={text => setDossier({...dossier, contattiPortiere: {nome: text , numero: dossier?.contattiPortiere ? dossier?.contattiPortiere.numero : ''}})}/> 
                 <TextInput value={dossier?.contattiPortiere ? dossier.contattiPortiere.numero : ''} style={styles.textFieldContact} placeholder='Numero telefono Portiere' onChangeText={text => setDossier({...dossier, contattiPortiere: { nome:dossier?.contattiPortiere ? dossier?.contattiPortiere.nome : '', numero: text}})}/> 
                 <TextInput value={dossier?.contattiAmministratore ? dossier.contattiAmministratore.nome : ''} style={styles.textField} placeholder='Nome Amministratore' onChangeText={text => setDossier({...dossier, contattiAmministratore: {nome: text , numero: dossier?.contattiAmministratore ? dossier?.contattiAmministratore.numero : ''}})}/> 

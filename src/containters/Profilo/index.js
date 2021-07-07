@@ -7,7 +7,7 @@ import {
   const B = (props) => <Text style={{fontWeight: 'bold'}}>{props.children}</Text>
   function Profilo(){
       return(
-          <ScrollView>
+          <ScrollView style={{ paddingLeft: 8, paddingRight:8}}>
                 <B>GUIDA ALLA LETTURA DEI VALORI: INDICAZIONI ED AVVERTENZE </B>
                 <Text>
                 Le nostre quotazioni immobiliari sono da considerarsi un ausilio alla stima finale per cui hanno un carattere puramente indicativo e non devono essere considerate  sostitutive di una valutazione realizzata da un esperto del settore. I valori riportati sono suscettibili di consistenti variazioni applicati al singolo caso, in relazione al particolare di diritto, di conservazione, alla qualità all'ubicazione dell'immobile. Pertanto per le caratteristiche di ogni singola unità è necessario il ricorso alle specifiche conoscenze ed esperienze professionali degli agenti immobiliari ed esperti del settore.{"\n"}

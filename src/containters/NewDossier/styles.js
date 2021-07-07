@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
       marginRight: 16,
       marginLeft:16,
       marginBottom: 8,
-      fontSize: 18
+      fontSize: 18,
+      height:40
     },
     textFieldNote:{
       borderColor: primaryColor,
@@ -43,7 +44,8 @@ const styles = StyleSheet.create({
       borderWidth: 2,
       marginRight: 16,
       marginLeft:64,
-      marginBottom: 8
+      marginBottom: 8,
+      height: 40
     },
     containerCheckBox:{
       marginLeft: 16,
@@ -51,12 +53,13 @@ const styles = StyleSheet.create({
     },
     checkBoxView:{
       flex: 0.5,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      paddingBottom:4,
     },
     checkBox:{
       alignSelf: 'center',
       flex:0.08,
-      marginRight:12
+      marginRight:12,
 
     },
     textCheckBox:{

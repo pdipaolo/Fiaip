@@ -36,21 +36,15 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Ho bisogno dell'accesso alla libreria</string>
+	<string>Consenti all&apos;app di accedere alla tua galleria per caricare le foto nei fascicoli.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Ho bisogno dell'accesso alla camera</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Usiamo la tua posizione per localizzarti</string>
+	<string>Consenti all&apos;app di accedere alla tua fotocamera per scattare foto.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Usiamo la tua posizione per localizzarti</string>
+	<string>Consenti all&apos;app di accedere alla tua posizione</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Usiamo la tua posizione per localizzarti</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>ho bisogno</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>hho bisogno</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>ho bisogno</string>
+	<string>Consenti all&apos;app di accedere alla tua posizione in background.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Consenti all&apos;app di accedere alla tua posizione in background.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SFProDisplay-Bold.otf</string>

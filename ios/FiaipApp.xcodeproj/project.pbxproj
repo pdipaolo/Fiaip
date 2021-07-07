@@ -158,7 +158,6 @@
 				63B1FB7C6592D90FBF4D07F9 /* Pods-FiaipApp-FiaipAppTests.debug.xcconfig */,
 				9251E6A497128E65629ACF3F /* Pods-FiaipApp-FiaipAppTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -173,7 +172,6 @@
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
-				C1792B715D4E6F8934F346D1 /* [CP] Embed Pods Frameworks */,
 				959C76F53B69DFA5CF5FD08E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -196,7 +194,6 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				B7D78CE6C232229961CB4617 /* [CP] Embed Pods Frameworks */,
 				48352AF4CE6DAFF0DA65409F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -359,40 +356,6 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B7D78CE6C232229961CB4617 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FiaipApp/Pods-FiaipApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FiaipApp/Pods-FiaipApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FiaipApp/Pods-FiaipApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C1792B715D4E6F8934F346D1 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FiaipApp-FiaipAppTests/Pods-FiaipApp-FiaipAppTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		FD10A7F022414F080027D42C /* Start Packager */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -501,6 +464,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F8SB5HJYN3;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FiaipApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -527,6 +491,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F8SB5HJYN3;
 				INFOPLIST_FILE = FiaipApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -662,6 +627,7 @@
 					"\"$(inherited)\"",
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};

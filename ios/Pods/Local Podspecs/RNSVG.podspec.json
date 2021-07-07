@@ -1,6 +1,6 @@
 {
   "name": "RNSVG",
-  "version": "12.1.1-0",
+  "version": "12.1.1",
   "summary": "SVG library for react-native",
   "license": "MIT",
   "homepage": "https://github.com/react-native-community/react-native-svg",
@@ -12,7 +12,7 @@
   },
   "source": {
     "git": "https://github.com/react-native-community/react-native-svg.git",
-    "tag": "v12.1.1-0"
+    "tag": "v12.1.1"
   },
   "source_files": "apple/**/*.{h,m}",
   "ios": {
