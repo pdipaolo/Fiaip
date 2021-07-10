@@ -79,7 +79,6 @@ function HomeScreen({ navigation }) {
                         console.warn("error",error)
                     );
               },
-              error => Alert.alert('Errore', 'Localizazione non permessa'),
               {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
             );
           }

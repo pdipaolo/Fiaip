@@ -6,7 +6,8 @@ import {
     TouchableWithoutFeedback,
     Linking,
     StyleSheet,
-    Image
+    Image,
+    Platform
   } from 'react-native';
 import { primaryColor, secondaryColor, white } from '../../constants/Colors';
 
@@ -19,7 +20,7 @@ import LinearGradient from 'react-native-linear-gradient'
 
 const styles = StyleSheet.create({  
     text:{
-      fontSize:16,
+      fontSize:14,
       fontWeight: 'bold',
       color: primaryColor,
       paddingTop: 2,
@@ -51,13 +52,18 @@ function renderRow(item) {
             <Text style={{ color: primaryColor, fontSize: 16,fontWeight: 'bold'}}>{item.name}</Text>
             <Text style={{ color: secondaryColor, fontSize: 12,fontWeight: 'bold'}}>{item.telefono}</Text>
         </View>
+        <TouchableWithoutFeedback onPress={()=> Linking.openURL(`tel:${item.telefono}`)}>
         <View style={{flex: 0.10}}>
-            <IconPhone width={26} height={26} fill={secondaryColor} onPress={()=> Linking.openURL(`tel:${item.telefono}`)}/>
+          
+            <IconPhone width={26} height={26} fill={secondaryColor} />
+          
         </View>
+        </TouchableWithoutFeedback>
     </View>);
 }
 function DettaglioFascicoli(props) {
   const { route } = props;
+  let schema = Platform.OS === 'ios' ? 'maps://app?saddr=' : 'google.navigation:q='
   const data = [{name: `Proprietario - ${route.params.data.obj?.contattiP?.nome}`,telefono: route.params.data.obj?.contattiP?.numero},{name: `Portiere - ${route.params.data.obj?.contattiPortiere?.nome}`,telefono: route.params.data.obj?.contattiPortiere?.numero},{name: `Amministratore - ${route.params.data.obj?.contattiAmministratore?.nome}`,telefono: route.params.data.obj?.contattiAmministratore?.numero}]
   
     return (
@@ -84,7 +90,7 @@ function DettaglioFascicoli(props) {
         </View>
 
         <View style={{flexDirection: 'row', height: 100, marginRight: 16,marginLeft: 16,marginBottom: 16, backgroundColor: white, borderColor: secondaryColor, borderRadius: 6, borderWidth: 1, elevation: 4}}>
-            <TouchableWithoutFeedback onPress={()=> Linking.openURL(`google.navigation:q=${route.params.data.obj?.indirizzo}&mode=a`)}>
+            <TouchableWithoutFeedback onPress={()=> Linking.openURL(`${schema}${route.params.data.obj?.indirizzo}&mode=a`)}>
                 <View style={{flexDirection:'column', flex: 0.333,marginRight: 2,marginLeft: 2,marginTop: 2, marginBottom: 8, borderRightWidth: 1, borderRightColor: secondaryColor, alignItems:'center',paddingTop: 18}}>
                     <IconMap width={26} height={26} fill={secondaryColor}/>
                     <Text style={styles.text} >Avvia Navigatore</Text>
