@@ -6,10 +6,11 @@ import {
     TouchableWithoutFeedback,
     Linking,
     StyleSheet,
-    Image,
+    Image
   } from 'react-native';
 import { primaryColor, secondaryColor, white } from '../../constants/Colors';
-import HomeIcon from '../../assets/images/home.svg';
+
+
 import IconMap from '../../assets/images/map.svg';
 import IconBook from '../../assets/images/book.svg'
 import IconPhone from '../../assets/images/telephone.svg';
