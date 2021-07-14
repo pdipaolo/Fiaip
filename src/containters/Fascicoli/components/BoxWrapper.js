@@ -70,14 +70,14 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       paddingLeft: 10,
     },
-    searchBar:{
+    searchBar:(value)=>({
       width: ITEM_WIDTH,
       height: 40,
       backgroundColor: 'transparent',
       flex:0.8,
       fontSize:18,
-      paddingBottom: 9
-    },
+      paddingBottom: value
+    }),
     provContainer:(value) => ({
       height: 40,
       borderRadius:2,

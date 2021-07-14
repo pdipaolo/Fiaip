@@ -6,6 +6,7 @@ import {
   View,
   Dimensions,
   TouchableWithoutFeedback,
+  Platform,
 } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 import { BoxShadow } from 'react-native-shadow';
@@ -82,7 +83,7 @@ function Cerca(props) {
             <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
               <TextInput
                 defaultValue={route.params?.address.split(",")[0]}
-                style={styles.searchBar}
+                style={styles.searchBar(Platform.OS === 'ios' ? 0 : 9)}
                 placeholder="Inserisci indirizzo"
                 onChangeText={text => setText(text)}
               />

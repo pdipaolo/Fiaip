@@ -3,7 +3,7 @@ import Carousel from 'react-native-snap-carousel';
 import Geolocation from 'react-native-geolocation-service';
 import Geocoder from 'react-native-geocoding';
 import SQLite from 'react-native-sqlite-storage';
-import { Platform, PermissionsAndroid } from 'react-native';
+import { Platform, PermissionsAndroid, Alert} from 'react-native';
 import { PERMISSIONS, requestMultiple } from 'react-native-permissions';
 import { useIsFocused } from "@react-navigation/native";
 import {
@@ -69,7 +69,6 @@ function HomeScreen({ navigation }) {
                 Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
                 
                 Geocoder.from(position.coords.latitude, position.coords.longitude)
-                // Geocoder.from('40.87682047278474', '15.185810238033884')
                     .then(json => {
                         var addressComponent = json.results[0].formatted_address
                         setGeolocalization(addressComponent)
@@ -79,6 +78,7 @@ function HomeScreen({ navigation }) {
                         console.warn("error",error)
                     );
               },
+              error => Alert.alert('Errore', 'Localizazione non permessa'),
               {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
             );
           }
@@ -118,8 +118,6 @@ function HomeScreen({ navigation }) {
                 console.warn("error",error)
             );
       },
-      // error => Alert.alert('Errore', 'Localizazione non permessa'),
-      // {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
 
 

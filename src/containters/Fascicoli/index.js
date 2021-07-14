@@ -5,7 +5,8 @@ import {
   TextInput,
   View, 
   Text,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Platform
 } from 'react-native';
 import { useIsFocused } from "@react-navigation/native";
 import { RowWrapper } from './components/RowWrapper';
@@ -85,7 +86,7 @@ function Fascicoli({navigation}) {
             <View style={styles.searchContainer}>
             <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
               <TextInput
-                style={styles.searchBar}
+                style={styles.searchBar(Platform.OS === 'ios' ? 0 : 9)}
                 placeholder="Inserisci indirizzo"
                 onChangeText={text => setText(text)}
               />
