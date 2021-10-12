@@ -70,12 +70,11 @@ import json from '../../dati/dataRicerca.json';
  
 function DettaglioFascicoli(props) {
   const {route} = props
-  const [value,setValue] = React.useState(false)
+  const [value,setValue] = React.useState(0)
   const [data, setData] = React.useState([])
 
   const search =() =>{
-    const valoreType = value ? 1 : 0
-    const dati = json.dati.filter((item)=> {return (item.municipalita == (route.params.munIndex+1) && item.Quartiere == (route.params.index+1) && valoreType == item.Type)})
+    const dati = json.dati.filter((item)=> {return (item.municipalita == (route.params.munIndex+1) && item.Quartiere == (route.params.index+1) && value == item.Type)})
     setData(dati)
   }
 
@@ -90,27 +89,25 @@ function DettaglioFascicoli(props) {
 
     return (
       <View style={{flexDirection: 'column',width: SLIDER_WIDTH, height: '100%'}}>
-          <View style={{flexDirection: 'row',flex: 0.2, width:260, alignItems: 'center', alignSelf: 'center'}}>
-          <TouchableWithoutFeedback onPress={() => setValue(false)}>
-              <View style={[toggleStyles.buttonContainer(!value,ITEM_WIDTH/3), {flex: 0.5}]}>
-                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Residenziale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={() => setValue(true)}>
-              <View style={[toggleStyles.buttonContainer(value,ITEM_WIDTH/3), {flex: 0.5}]}>
-                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-                <Text style={toggleStyles.buttonText}>Commerciale</Text>
-              </View>
-            </TouchableWithoutFeedback>
-            {/* <ButtonContainer style={{flex: 0.5}} onPress={() => setValue(false)} value={!value} height={ITEM_WIDTH/3}>
-              <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-              <ButtonText>Residenziale</ButtonText>
-            </ButtonContainer>
-            <ButtonContainer style={{flex: 0.5}} onPress={() => setValue(true)} value={value} height={ITEM_WIDTH/3}>
-              <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
-              <ButtonText>Commerciale</ButtonText>
-            </ButtonContainer> */}
+          <View style={{flexDirection: 'row',flex: 0.1, alignItems: 'center', alignSelf: 'center', paddingTop: 20, paddingBottom: 20}}>
+            <TouchableWithoutFeedback onPress={() => setValue(0)}>
+                <View style={[toggleStyles.buttonContainer(value === 0 ? true : false,ITEM_WIDTH/4), {flex: 0.3}]}>
+                  <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                  <Text style={toggleStyles.buttonText}>Residenziale</Text>
+                </View>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => setValue(1)}>
+                <View style={[toggleStyles.buttonContainer(value === 1 ? true : false,ITEM_WIDTH/4), {flex: 0.3}]}>
+                  <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                  <Text style={toggleStyles.buttonText}>Commerciale</Text>
+                </View>
+              </TouchableWithoutFeedback>
+              <TouchableWithoutFeedback onPress={() => setValue(2)}>
+                <View style={[toggleStyles.buttonContainer(value === 2 ? true : false,ITEM_WIDTH/4), {flex: 0.3}]}>
+                  <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                  <Text style={toggleStyles.buttonText}>Box Auto</Text>
+                </View>
+              </TouchableWithoutFeedback>
           </View>
 
           <View style={{ flex: 0.8, flexDirection: "column", justifyContent: 'space-between' }}>

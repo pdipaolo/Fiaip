@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
     Text,
     View,
@@ -7,11 +7,13 @@ import {
     Linking,
     StyleSheet,
     Image,
-    Platform
+    Platform,
+    PermissionsAndroid,
+    Share
   } from 'react-native';
 import { primaryColor, secondaryColor, white } from '../../constants/Colors';
-
-
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
+// import Share from 'react-native-share';
 import IconMap from '../../assets/images/map.svg';
 import IconBook from '../../assets/images/book.svg'
 import IconPhone from '../../assets/images/telephone.svg';
@@ -63,9 +65,53 @@ function renderRow(item) {
 }
 function DettaglioFascicoli(props) {
   const { route } = props;
+  const [filePath, setFilePath] = useState('');
   let schema = Platform.OS === 'ios' ? 'maps://app?saddr=' : 'google.navigation:q='
   const data = [{name: `Proprietario - ${route.params.data.obj?.contattiP?.nome}`,telefono: route.params.data.obj?.contattiP?.numero},{name: `Portiere - ${route.params.data.obj?.contattiPortiere?.nome}`,telefono: route.params.data.obj?.contattiPortiere?.numero},{name: `Amministratore - ${route.params.data.obj?.contattiAmministratore?.nome}`,telefono: route.params.data.obj?.contattiAmministratore?.numero}]
-  
+  const isPermitted = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const granted = await PermissionsAndroid.request(
+          PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+          {
+            title: 'External Storage Write Permission',
+            message: 'App needs access to Storage data',
+          },
+        );
+        
+        return granted === PermissionsAndroid.RESULTS.GRANTED;
+      } catch (err) {
+        alert('Write permission err', err);
+        return false;
+      }
+    } else {
+      return true;
+    }
+  };
+  const createPDF = async () => {
+    
+      let options = {
+        //Content to print
+        html:
+          '<h1 style="text-align: center;"><strong>Hello Guyssss</strong></h1><p style="text-align: center;">Here is an example of pdf Print in React Native</p><p style="text-align: center;"><strong>Team About React</strong></p>',
+        //File Name
+        fileName: 'test',
+        //File directory
+        directory: 'Documents',
+      };
+      try {
+        let file = await RNHTMLtoPDF.convert(options)
+        Share.share({
+          // title: "This is my report ",
+          // message: "Message:",
+          url: file.filePath,
+          // subject: "Report",
+      })
+      } catch (err){
+        console.log(err)
+      }
+    
+  };
     return (
       <ScrollView >
         <Image
@@ -102,7 +148,7 @@ function DettaglioFascicoli(props) {
                     <Text style={styles.text} >Leggi Fascicolo</Text>
                 </View>
             </TouchableWithoutFeedback>
-            <TouchableWithoutFeedback onPress={()=>console.log("ciao3")}>
+            <TouchableWithoutFeedback onPress={createPDF}>
                 <View style={{flex: 0.333,marginRight: 2,marginLeft: 2,marginTop: 2, marginBottom: 8, borderLeftWidth: 1, borderLeftColor: secondaryColor, alignItems:'center',paddingTop: 18}}>
                     <IconExport width={26} height={26} fill={secondaryColor}/>
                     <Text style={styles.text} >Invia File PDF</Text>

@@ -17,27 +17,38 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>localhost</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+			</dict>
+		</dict>
+	</dict>
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Consenti all'app di accedere alla tua galleria per caricare le foto nei fascicoli.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Consenti all'app di accedere alla tua fotocamera per scattare foto.</string>
+	<string>Consenti all'app di utilizzare la fotocamera per scattare foto da salvare nei fascicoli creati.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Consenti all'app di accedere alla tua posizione in background.</string>
+	<string>Consenti all'app di accedere alla geolocalizzazione per una ricerca rapida delle quotazioni attraverso gli indirizzi.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Consenti all'app di accedere alla tua posizione in background.</string>
+	<string>Consenti all'app di accedere alla geolocalizzazione per una ricerca rapida delle quotazioni attraverso gli indirizzi.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Consenti all'app di accedere alla tua posizione</string>
+	<string>Consenti all'app di accedere alla geolocalizzazione per una ricerca rapida delle quotazioni attraverso gli indirizzi.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Consenti all'app di accedere al tuo microfono per caricare le foto</string>
+	<string>Consenti all'app di accedere al tuo microfono per salvare le foto nei fascicoli.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Consenti all'app di accedere alla tua galleria per caricare le foto nei fascicoli.</string>
+	<string>Consenti all'app di accedere alla tua galleria per caricare foto da salvare nei fascicoli.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SFProDisplay-Bold.otf</string>

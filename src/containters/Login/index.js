@@ -2,14 +2,29 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Alert
   } from 'react-native';
 import SplashIcon from '../../assets/images/splash.svg';
 import { primaryColor } from '../../constants/Colors';
 function Login({ navigation }) {
-    const dateSett = new Date("2021/9/01");
+    const dateSett = new Date("2021/11/01");
     const date = new Date()
     
+    if(dateSett<date){
+      console.log("here");
+      Alert.alert(
+        "L'applicazione deve essere aggiornata",
+        "",
+        [
+          {
+            text: "OK",
+            onPress: () => {},
+            style: "cancel",
+          }
+        ]
+      );
+    }
     return (
 
       <View style={{flexDirection:'column', height:'100%'}}>

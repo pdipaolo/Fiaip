@@ -50,8 +50,10 @@ function Cerca(props) {
   
   const searchText = () =>{
     const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(text.toLowerCase())) && x.Type == buttonType && x.City == provType})
-    setData(result)
+
+    setData(result.flat(1))
   }
+
   React.useEffect(()=>{
    setText( route.params?.address.split(",")[0] ? route.params?.address.split(",")[0] : '')
   },[isFocused])
@@ -132,13 +134,14 @@ function Cerca(props) {
         </BoxShadow>
       </View>
 
-      <View style={{backgroundColor: 'white',zIndex: 0 ,paddingTop:16}}>
+      <View style={{backgroundColor: 'white',zIndex: 10 ,paddingTop:16}}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }}>
           <View style={{ flex: 0.60, height: 30 }}></View>
           <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.M.U</Text>
           <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.L.U</Text>
         </View>
         <FlatList
+          style={{marginBottom: 315}}
           data={data}
           initialNumToRender={50}
           renderItem={({ item, index }) => <RowWrapper item={item} index={index} />}
