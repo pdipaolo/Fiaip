@@ -28,6 +28,7 @@ import CarIcon from '../../assets/images/car.svg';
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
 
+import {GOOGLE_API} from '../../../config';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
@@ -62,8 +63,8 @@ function HomeScreen({ navigation }) {
   const geolocation = () => {
     Geolocation.getCurrentPosition(
       position => {
-        console.log("ios");
-        Geocoder.init('AIzaSyB5h4Y6aG0MMm4x3LLq1E6zRxFVdT9bxh0');
+        console.log(GOOGLE_API);
+        Geocoder.init(GOOGLE_API);
 
         Geocoder.from(position.coords.latitude, position.coords.longitude)
           .then(json => {
