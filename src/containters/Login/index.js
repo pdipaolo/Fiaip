@@ -32,7 +32,7 @@ function Login({ navigation }) {
             <SplashIcon width={'90%'} height={180} paddingTop={20} />
           </View>
           <View style={{flex: 0.4, width: '100%', alignItems: 'center'}}>
-            <TouchableWithoutFeedback disabled={ dateSett<date ? true : false} onPress={() => navigation.navigate('Home')}>
+            <TouchableWithoutFeedback onPress={() => navigation.navigate('Home')}>
             <View style={{ width: '50%', height: 80, alignItems: 'center',backgroundColor:primaryColor, paddingVertical: 20, elevation:5}}>
               <Text style={{fontSize: 24, color: 'white'}}>Entra</Text>
             </View>

@@ -63,7 +63,6 @@ function HomeScreen({ navigation }) {
   const geolocation = () => {
     Geolocation.getCurrentPosition(
       position => {
-        console.log(GOOGLE_API);
         Geocoder.init(GOOGLE_API);
 
         Geocoder.from(position.coords.latitude, position.coords.longitude)
