@@ -36,7 +36,7 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Consenti all&apos;app di accedere alla tua galleria per caricare le foto nei fascicoli.</string>
+	<string>Consenti all'app di accedere alla tua galleria per caricare le foto nei fascicoli.</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Consenti all'app di utilizzare la fotocamera per scattare foto da salvare nei fascicoli creati.</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

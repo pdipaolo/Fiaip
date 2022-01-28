@@ -475,11 +475,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 3;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> feature/material-ui
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = R5M755L7D9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FiaipApp/Info.plist;
@@ -487,11 +483,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				MARKETING_VERSION = 1.0.5;
-=======
-				MARKETING_VERSION = 1.0.4;
->>>>>>> feature/material-ui
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -515,11 +507,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-<<<<<<< HEAD
-				CURRENT_PROJECT_VERSION = 3;
-=======
-				CURRENT_PROJECT_VERSION = 1;
->>>>>>> feature/material-ui
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = R5M755L7D9;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = FiaipApp/Info.plist;
@@ -527,11 +515,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-<<<<<<< HEAD
 				MARKETING_VERSION = 1.0.5;
-=======
-				MARKETING_VERSION = 1.0.4;
->>>>>>> feature/material-ui
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
