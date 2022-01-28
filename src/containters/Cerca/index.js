@@ -35,6 +35,7 @@ import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
 import SearchIcon from '../../assets/images/search.svg';
 import json from '../../dati/dataRicerca.json';
+import data_json from '../../dati/remove.json';
 
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
@@ -49,9 +50,17 @@ function Cerca(props) {
   const isFocused = useIsFocused();
   
   const searchText = () =>{
-    const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(text.toLowerCase())) && x.Type == buttonType && x.City == provType})
-    setData(result)
+    const split_array = text.split(" ").filter(x =>  !data_json.denominazione.includes(x.toLowerCase())).filter(x=> x!= "");
+    let address_Array = [];
+    console.log(split_array);
+    split_array.map( parola => {
+      const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(parola.toLowerCase())) && x.Type == buttonType && x.City == provType})
+      address_Array.push(result)
+    })
+    var merged = [].concat.apply([], address_Array);
+    setData(merged)
   }
+
   React.useEffect(()=>{
    setText( route.params?.address.split(",")[0] ? route.params?.address.split(",")[0] : '')
   },[isFocused])
@@ -85,6 +94,7 @@ function Cerca(props) {
                 defaultValue={route.params?.address.split(",")[0]}
                 style={styles.searchBar(Platform.OS === 'ios' ? 0 : 9)}
                 placeholder="Inserisci indirizzo"
+                placeholderTextColor="#777"
                 onChangeText={text => setText(text)}
               />
             </View>

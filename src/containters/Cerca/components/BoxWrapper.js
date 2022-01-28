@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
       flex:0.8,
       fontSize:18,
       paddingBottom: value,
+      color: '#000'
     }),
     provContainer:(value) => ({
       height: 40,

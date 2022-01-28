@@ -7,13 +7,32 @@ import { grey, primaryColor, white } from '../../constants/Colors';
 const SLIDER_WIDTH = Dimensions.get('window').width;
 const styles = StyleSheet.create({ 
     text: {
-        color: primaryColor,
+        color: grey,
         fontSize: 16,
-        fontWeight: 'bold',
-        marginLeft: 16,
-        marginTop: 16,
-        marginBottom: 16
+        textAlign: 'center',
+        alignContent: 'center',
+        alignItems: 'center',
+        flex: 0.95,
     },
+    
+    dropMenu:{
+      display: 'flex',
+      flexDirection: 'row',
+      marginTop: 20,
+      width: '100%',
+      height: 40,
+      backgroundColor: white,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 12,
+      },
+      shadowOpacity: 0.58,
+      shadowRadius: 16.00,
+      elevation: 24,
+      paddingTop: 10,
+    },
+    
     subtext:{
       color: primaryColor,
       fontSize: 16,
@@ -26,7 +45,8 @@ const styles = StyleSheet.create({
       marginLeft:16,
       marginBottom: 8,
       fontSize: 18,
-      height:40
+      height:40,
+      color: '#000'
     },
     textFieldNote:{
       borderColor: primaryColor,
@@ -136,9 +156,8 @@ const styles = StyleSheet.create({
     
     situazioneLocativaView:{
       flexDirection: 'row',
-      marginLeft: 32,
-      marginRight: 32,
-      marginBottom:16
+      margin: 32
+
     },
     locativaButtonOne:{
       flex: 0.33,

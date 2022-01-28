@@ -20,11 +20,19 @@ import IconMap from '../../assets/images/map.svg';
 import DeleteIcon from '../../assets/images/delete.svg';
 import GalleryIcon from '../../assets/images/gallery.svg';
 import CameraIcon from '../../assets/images/camera.svg';
+import UpArrow from '../../assets/images/upArrow.svg';
+import DownArrow from '../../assets/images/downArrow.svg';
 
   function NewDossier(props){
-      const { route } = props
+    const { route } = props
     const db = openDatabase({ name: 'FiaipDB.db' });
     const [dossier, setDossier] = React.useState(props.route.params.data ? props.route.params.data : null);
+    const [dropControl1, setDropControl1] = React.useState(false);
+    const [dropControl2, setDropControl2] = React.useState(false);
+    const [dropControl3, setDropControl3] = React.useState(false);
+    const [dropControl4, setDropControl4] = React.useState(false);
+    const [dropControl5, setDropControl5] = React.useState(false);
+    const [dropControl6, setDropControl6] = React.useState(false);
     const clean = () => {
       db.transaction(function (txn) {
         txn.executeSql(`DELETE FROM dossier WHERE dossier_id=${route.params.id}`,[],     
@@ -141,28 +149,47 @@ const launchAndroidCamera = () => {
       },
     ]
   );
+
+  const pushArray = (index) => {
+    console.log(dropControl[index]);
+    let array = dropControl;
+    array[index] = !dropControl[index]
+    console.log();
+    setDropControl(array)
+  }
       return(
           <ScrollView style={{backgroundColor: white}} >
-                <Text style={styles.text}>Ubicazione Immobili</Text>
-                <View style={styles.situazioneLocativaView}>
-                    <TouchableWithoutFeedback onPress={()=> setDossier({...dossier, city: 0})}>
-                        <View style={[styles.cityButtonOne,{backgroundColor: dossier?.city === 0 ? primaryColor : white }]}>
-                        <Text style={[styles.locativaText, {color: dossier?.city === 0 ? white : primaryColor }]}>Napoli</Text>
+                    <TouchableWithoutFeedback onPress={()=> setDropControl1(!dropControl1)}>
+                        <View style={styles.dropMenu}>
+                          <Text style={styles.text}>Ubicazione Immobili</Text>
+                          {dropControl1 ? <UpArrow width={20} height={20}/> : <DownArrow width={20} height={20}/>}
                         </View>
-                    </TouchableWithoutFeedback>
+
+                    </TouchableWithoutFeedback>            
+
+                { dropControl1 ? <View>
+                  <View style={styles.situazioneLocativaView} >
+                      <TouchableWithoutFeedback onPress={()=> setDossier({...dossier, city: 0})}>
+                          <View style={[styles.cityButtonOne,{backgroundColor: dossier?.city === 0 ? primaryColor : white }]}>
+                          <Text style={[styles.locativaText, {color: dossier?.city === 0 ? white : primaryColor }]}>Napoli</Text>
+                          </View>
+                      </TouchableWithoutFeedback>
                     <TouchableWithoutFeedback onPress={()=> setDossier({...dossier, city: 1})}>
                         <View style={[styles.cityButtonTwo,{ backgroundColor: dossier?.city === 1 ? primaryColor : white}]}>
                         <Text style={[styles.locativaText, {color: dossier?.city === 1 ? white : primaryColor }]}>Provincia</Text>
                         </View>
                     </TouchableWithoutFeedback>
-                </View>
-                
+
+                  </View> 
+                                                      
                 <TextInput value={dossier?.indirizzo} style={styles.textField} placeholder=' Aggiungi indirizzo' onChangeText={text => setDossier({...dossier, indirizzo: text})}/>
                 <TextInput value={dossier?.metri} style={styles.textField} placeholder=' Metri quadrati' onChangeText={text => setDossier({...dossier, metri: text})}/>
                 <TextInput value={dossier?.scala} style={styles.textField} placeholder=' Scala' onChangeText={text => setDossier({...dossier, scala: text})}/>
                 <TextInput value={dossier?.piano} style={styles.textField} placeholder=' Piano' onChangeText={text => setDossier({...dossier, piano: text})}/>
-                {/* TODO */}
                 <TextInput value={dossier?.interno} style={styles.textField} placeholder=' Interno' onChangeText={text => setDossier({...dossier, interno: text})}/>
+                  </View>: null
+                }
+
                 <Text style={styles.text}>Caratteristiche Immobili</Text>
                 <View style={styles.situazioneLocativaView}>
                     <TouchableWithoutFeedback onPress={()=> setDossier({...dossier, tipology: 0})}>

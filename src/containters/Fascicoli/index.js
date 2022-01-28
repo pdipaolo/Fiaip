@@ -8,7 +8,6 @@ import {
   TouchableWithoutFeedback,
   Platform
 } from 'react-native';
-import { useIsFocused } from "@react-navigation/native";
 import { RowWrapper } from './components/RowWrapper';
 import {
   primaryColor,
@@ -43,12 +42,10 @@ function Fascicoli({navigation}) {
   const [data, setData] = React.useState(dataList)
   const [text, setText] = React.useState('');
   const db = SQLite.openDatabase({ name: 'FiaipDB.db' });
-  const isFocused = useIsFocused();
   const searchText = () =>{
    
     db.transaction(function (txn) {
       txn.executeSql('SELECT * FROM `dossier`', [], function (tx, res) {
-        
           let resArray = []
           for (let i = 0; i < res.rows.length; ++i) {
             if (JSON.parse( res.rows.item(i).dossier_obj).tipology == buttonType && JSON.parse( res.rows.item(i).dossier_obj).city == provType) {
@@ -88,12 +85,17 @@ function Fascicoli({navigation}) {
               <TextInput
                 style={styles.searchBar(Platform.OS === 'ios' ? 0 : 9)}
                 placeholder="Inserisci indirizzo"
+                placeholderTextColor="#777" 
                 onChangeText={text => setText(text)}
               />
             </View>
             </BoxShadow>
           </View>
-          <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} onPress={()=> navigation.navigate('New Dossier',{data:null,id:null, navigation: navigation})} />  
+          <TouchableWithoutFeedback onPress={()=> navigation.navigate('New Dossier',{data:null,id:null, navigation: navigation})}>
+            <View style={{height:40, width: 40,}} >
+              <NewdossierIcon style={[styles.image, {flex:0.10}]} width={40} height={40} fill={secondaryColorOpacity} />
+            </View>
+          </TouchableWithoutFeedback>  
         </View>
         <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: white }]}>
           <TouchableWithoutFeedback onPress={() => setButtonType(0)}>
