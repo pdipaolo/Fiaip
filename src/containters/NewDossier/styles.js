@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
       shadowColor: "#000",
       shadowOffset: {
         width: 0,
-        height: 12,
+        height: 6,
       },
       shadowOpacity: 0.58,
       shadowRadius: 16.00,
@@ -213,9 +213,10 @@ const styles = StyleSheet.create({
       fontWeight:'bold',
       textAlign:'center',
       paddingTop:6
-    }
-
-
+    },
+    marginStyle :{
+      marginTop: 32
+    },
   });
 
   export default styles;
