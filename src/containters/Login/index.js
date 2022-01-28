@@ -2,13 +2,12 @@ import React from 'react';
 import {
     View,
     Text,
-    TouchableWithoutFeedback
+    TouchableWithoutFeedback,
+    Alert
   } from 'react-native';
 import SplashIcon from '../../assets/images/splash.svg';
 import { primaryColor } from '../../constants/Colors';
 function Login({ navigation }) {
-
-    
     return (
 
       <View style={{flexDirection:'column', height:'100%'}}>

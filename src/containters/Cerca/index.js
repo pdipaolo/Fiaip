@@ -52,7 +52,6 @@ function Cerca(props) {
   const searchText = () =>{
     const split_array = text.split(" ").filter(x =>  !data_json.denominazione.includes(x.toLowerCase())).filter(x=> x!= "");
     let address_Array = [];
-    console.log(split_array);
     split_array.map( parola => {
       const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(parola.toLowerCase())) && x.Type == buttonType && x.City == provType})
       address_Array.push(result)
