@@ -3,8 +3,13 @@ import {
   FlatList,
   Text,
   TextInput,
-  View
+  View,
+  Dimensions,
+  TouchableWithoutFeedback,
+  Platform,
 } from 'react-native';
+import { useIsFocused } from "@react-navigation/native";
+import { BoxShadow } from 'react-native-shadow';
 
 import { RowWrapper } from './components/RowWrapper';
 import {
@@ -15,36 +20,49 @@ import {
 } from '../../constants/Colors';
 
 import {
-  ButtonContainer,
-  ButtonText,
+  toggleStyles,
 } from '../../components/ToggleButton';
 
-import { BoxShadow } from 'react-native-shadow';
+
+import {
+  shadowOpt,
+  styles,
+  shadowLine,
+} from './components/BoxWrapper';
+
 import CarIcon from '../../assets/images/car.svg'
 import HomeIcon from '../../assets/images/home.svg';
 import BagIcon from '../../assets/images/bag.svg';
 import SearchIcon from '../../assets/images/search.svg';
-import {
-  shadowOpt,
-  styles,
-  ProvContainer,
-  ProvText,
-  shadowLine,
-} from './components/BoxWrapper';
+import json from '../../dati/dataRicerca.json';
+import data_json from '../../dati/remove.json';
 
-import json from './dataRicerca.json';
-
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.85);
 function Cerca(props) {
   const { route } = props;
+  
+  const [text, setText] = React.useState('');
   const [buttonType, setButtonType] = React.useState(0);
   const [provType, setProvType] = React.useState(0);
-  const dataList = json.Na_residenziale
+  const dataList = json.dati
   const [data, setData] = React.useState(dataList)
-  const [text, setText] = React.useState('');
+  const isFocused = useIsFocused();
+  
   const searchText = () =>{
-    const result = dataList.filter( x => { return x.Address?.toLowerCase().includes(text.toLowerCase()) && x.Type == buttonType && x.City == provType})
-    setData(result)
+    const split_array = text.split(" ").filter(x =>  !data_json.denominazione.includes(x.toLowerCase())).filter(x=> x!= "");
+    let address_Array = [];
+    split_array.map( parola => {
+      const result = dataList.filter( x => { return (x.Address?.toLowerCase().includes(parola.toLowerCase())) && x.Type == buttonType && x.City == provType})
+      address_Array.push(result)
+    })
+    var merged = [].concat.apply([], address_Array);
+    setData(merged)
   }
+
+  React.useEffect(()=>{
+   setText( route.params?.address.split(",")[0] ? route.params?.address.split(",")[0] : '')
+  },[isFocused])
 
   React.useEffect(()=>{
     
@@ -61,20 +79,21 @@ function Cerca(props) {
   }, [route.params?.type]);
 
   React.useEffect(() => {
-    console.log("here");
       searchText()
   }, [text]);
 
   return (
-    <View style={ {display:'flex', flexDirection: 'column',height: '100%',paddingTop: 30, backgroundColor: white }}>
-      <View style={{flex:0.35,backgroundColor: '#fff' }}>
-        <View style={{ padding: 20 }}>
+    <View style={ {height: '100%',paddingTop: 30, backgroundColor: white }}>
+      <View style={{backgroundColor: white,zIndex: 1 }}>
+        <View style={{ padding: 20, backgroundColor: '#fff'}}>
           <BoxShadow setting={shadowOpt}>
             <View style={styles.searchContainer}>
             <SearchIcon style={styles.image} width={20} height={20} fill={grey} />
               <TextInput
-                style={styles.searchBar}
+                defaultValue={route.params?.address.split(",")[0]}
+                style={styles.searchBar(Platform.OS === 'ios' ? 0 : 9)}
                 placeholder="Inserisci indirizzo"
+                placeholderTextColor="#777"
                 onChangeText={text => setText(text)}
               />
             </View>
@@ -82,28 +101,39 @@ function Cerca(props) {
           </BoxShadow>
         </View>
 
-        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center' }]}>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(0)}} value={buttonType === 0 ? true : false}>
-            <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Residenziale</ButtonText>
-          </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(1)}} value={buttonType === 1 ? true : false}>
-            <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Commerciale</ButtonText>
-          </ButtonContainer>
-          <ButtonContainer style={{ flex: 0.33,height: '100%' }} onPress={() => {setButtonType(2)}} value={buttonType === 2 ? true : false}>
-            <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity} />
-            <ButtonText>Box Auto</ButtonText>
-          </ButtonContainer>
+        <View style={[styles.quotazioni, { flexDirection: "row", justifyContent: 'center',backgroundColor: '#fff' }]}>
+
+          <TouchableWithoutFeedback onPress={() => setButtonType(0)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 0 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Residenziale</Text>
+              </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => setButtonType(1)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 1 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <BagIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Commerciale</Text>
+              </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={() => setButtonType(2)}>
+              <View style={[toggleStyles.buttonContainer(buttonType === 2 ? true : false,ITEM_WIDTH/3), {flex: 0.33,height:'100%'}]}>
+                <CarIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+                <Text style={toggleStyles.buttonText}>Box Auto</Text>
+              </View>
+          </TouchableWithoutFeedback>
         </View>
 
-        <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10 }}>
-          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(0)} value={provType === 0 ? true : false}>
-            <ProvText value={provType === 0 ? true : false}>Napoli</ProvText>
-          </ProvContainer>
-          <ProvContainer style={{ flex: 0.50 }} onPress={() => setProvType(1)} value={provType === 1 ? true : false}>
-            <ProvText value={provType === 1 ? true : false}>Provincia</ProvText>
-          </ProvContainer>
+        <View style={{ flexDirection: "row", justifyContent: 'center', padding: 10,backgroundColor: '#fff' }}>
+          <TouchableWithoutFeedback onPress={() => setProvType(0)}>
+              <View style={[styles.provContainer(provType===0?true:false),{ flex: 0.50}]} >
+                <Text style={styles.provText(provType===0?true:false)}>Napoli</Text>            
+              </View>
+            </TouchableWithoutFeedback>
+            <TouchableWithoutFeedback onPress={() => setProvType(1)}>
+              <View style={[styles.provContainer(provType===1?true:false),{ flex: 0.50}]} >
+                <Text style={styles.provText(provType===1?true:false)}>Provincia</Text>
+              </View>
+            </TouchableWithoutFeedback>
         </View>
 
         <BoxShadow setting={shadowLine}>
@@ -111,11 +141,11 @@ function Cerca(props) {
         </BoxShadow>
       </View>
 
-      <View style={{flex:0.65,backgroundColor: white }}>
+      <View style={{backgroundColor: 'white',zIndex: 0 ,paddingTop:16}}>
         <View style={{ flexDirection: "row", paddingLeft: 20, height: 30 }}>
           <View style={{ flex: 0.60, height: 30 }}></View>
-          <Text style={{ flex: 0.20, height: 30 }}>V.M.U</Text>
-          <Text style={{ flex: 0.20, height: 30 }}>V.L.U</Text>
+          <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.M.U</Text>
+          <Text style={{ flex: 0.20, height: 30, textAlign: 'center' }}>V.L.U</Text>
         </View>
         <FlatList
           data={data}

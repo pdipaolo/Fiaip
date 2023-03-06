@@ -5,7 +5,7 @@ import HomeScreen from '../HomeScreen';
 import Cerca from '../Cerca';
 import Fascicoli from '../Fascicoli';
 import Mappa from '../Mappa';
-import Crediti from '../Mappa';
+import Crediti from '../Crediti';
 
 import HomeIcon from '../../assets/images/home.svg';
 import DossierIcon from '../../assets/images/dossier.svg';
@@ -14,11 +14,10 @@ import SearchIcon from '../../assets/images/search.svg';
 import UserIcon from '../../assets/images/user.svg';
 
 import { primaryColor, grey} from '../../constants/Colors'
-
 const Tab = createBottomTabNavigator();
 
 function Home() {
-  
+
     return (    
         <Tab.Navigator
           screenOptions={({ route }) => ({

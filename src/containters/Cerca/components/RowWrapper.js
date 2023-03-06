@@ -11,10 +11,10 @@ import { lightblue, primaryColor, secondaryColor, white } from '../../../constan
       const textColor = index%2 ? primaryColor : secondaryColor;
 
     return(
-        <View style={{flexDirection: "row",paddingTop:20,paddingLeft:20, height: 60, backgroundColor: backgroundColor}}>
-            <Text style={{flex: 0.60, height: 60, color: textColor}}>{item.Address}</Text>
-            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.VMU}</Text>
-            <Text style={{flex: 0.20, height: 60, color: textColor}}>{item.VLU}</Text>
+        <View style={{flexDirection: "row",paddingTop:10,paddingBottom:10,paddingLeft:20, height: 'auto', backgroundColor: backgroundColor}}>
+            <Text style={{flex: 0.60, height: 'auto', color: textColor}}>{item.Address}</Text>
+            <Text style={{flex: 0.20, height: 'auto', color: textColor, textAlign: 'center'}}>{item.VMU}</Text>
+            <Text style={{flex: 0.20, height: 'auto', color: textColor, textAlign: 'center'}}>{item.VLU}</Text>
         </View>
     )
   };

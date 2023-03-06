@@ -1,0 +1,46 @@
+{
+    "Municipalita": [
+        {
+            "Numero": "1",
+            "Quartieri": [{"nome":"Chiaia"},{"nome":"Posillipo"},{"nome":"S.Ferdinando"}]
+        },
+        {
+            "Numero": "2",
+            "Quartieri": [{"nome":"Avvocata"},{"nome":"Montecalvario"},{"nome":"Mercato"},{"nome":"Pendino"},{"nome":"Porto"},{"nome":"S.Giuseppe"}]
+        },
+        {
+            "Numero": "3",
+            "Quartieri": [{"nome":"Stella"},{"nome":"S.Carlo all'Arena"}]
+        },
+        {
+            "Numero": "4",
+            "Quartieri": [{"nome":"S.Lorenzo"},{"nome":"Vicaria"},{"nome":"Poggioreale"},{"nome":"Zona Industriale"}]
+        },
+        {
+            "Numero": "5",
+            "Quartieri": [{"nome":"Arenella"},{"nome":"Vomero"}]
+        },
+        {
+            "Numero": "6",
+            "Quartieri": [{"nome":"Ponticelli"},{"nome":"Barra"},{"nome":"San Giovanni a Teduccio"}]
+        },
+        {
+            "Numero": "7",
+            "Quartieri": [{"nome":"Miano"},{"nome":"Secondigliano"},{"nome":"San Pietro a Patierno"}]
+        },
+        {
+            "Numero": "8",
+            "Quartieri": [{"nome":"Piscinola"},{"nome":"Marianella"},{"nome":"Chiaiano"},{"nome":"Scampia"}]
+        },
+        {
+            "Numero": "9",
+            "Quartieri": [{"nome":"Soccavo"},{"nome":"Pianura"}]
+        },
+        {
+            "Numero": "10",
+            "Quartieri": [{"nome":"Bagnoli"},{"nome":"Fuorigrotta"}]
+        }
+        
+    ]
+}
+

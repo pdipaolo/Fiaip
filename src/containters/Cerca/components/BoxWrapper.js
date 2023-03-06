@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import {
     StyleSheet,
     Dimensions,
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
       backgroundColor: white,
     },
     quotazioni:{
-      height: 140,
+      height: ITEM_WIDTH/3,
       paddingLeft: 10,
       paddingRight: 10,
       paddingBottom: 20,
@@ -58,7 +57,7 @@ const styles = StyleSheet.create({
     text:{
       fontSize: 14,
       fontWeight: 'bold',
-      color: primaryColor,
+      color: primaryColor
     },
     searchContainer:{
       width: ITEM_WIDTH,
@@ -69,36 +68,40 @@ const styles = StyleSheet.create({
       backgroundColor: white,
       flexDirection: 'row',
       alignItems: 'center',
-      paddingLeft: 10,
+      paddingLeft: 10
     },
-    searchBar:{
+    searchBar:(value)=>({
       width: ITEM_WIDTH,
       height: 40,
       backgroundColor: 'transparent',
       flex:0.8,
       fontSize:18,
-      paddingBottom: 9
-    }
+      paddingBottom: value,
+      color: '#000'
+    }),
+    provContainer:(value) => ({
+      height: 40,
+      borderRadius:2,
+      paddingHorizontal: 4,
+      paddingVertical: 4,
+      margin: 10,
+      shadowColor: "#000",
+      shadowOffset: {
+        width: 0,
+        height: 2,
+      },
+      shadowRadius: 3.84,
+      justifyContent: 'center',
+      alignContent: 'center',
+      backgroundColor: value ? primaryColor: lightblue,
+      shadowOpacity: value ? 0 : 0.25,
+      elevation: value ? 0 : 5,
+    }),
+    provText: (value)=>({
+      fontSize: 12,
+      color: value ? white : primaryColor,
+      alignSelf: 'center'
+    })
   });
 
-const ProvContainer = styled.TouchableOpacity`
-elevation: ${(props)=>props.value === true ? 0 : 12};
-height: 40;
-border-radius: 2px;
-padding-vertical: 4px;
-padding-horizontal: 4px;
-margin: 10px;
-background-color: ${(props)=> props.value === true ? primaryColor : lightblue};
-shadowColor: ${black};
-shadowOpacity: 0.5;
-justify-content: center;
-align-items: center;
-shadow-radius: 2px;
-`;
-
-const ProvText = styled.Text`
-font-size: 12px;
-color: ${(props)=> props.value === true ? white : primaryColor};
-align-self: center;
-`;
-export  { shadowOpt, styles, ProvContainer, ProvText, shadowLine };
+export  { shadowOpt, styles, shadowLine };

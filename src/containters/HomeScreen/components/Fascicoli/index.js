@@ -3,28 +3,23 @@ import {BoxShadow} from 'react-native-shadow'
 import {
     Text,
     View,
-    StyleSheet,
+    TouchableWithoutFeedback,
+    Dimensions
   } from 'react-native';
-
+import {switchImage} from '../../../../utils/switchIcon';
 import { 
     white,
-    secondaryColorOpacity 
   } from '../../../../constants/Colors';
 
-  import HomeIcon from '../../../../assets/images/home.svg';
-  const styles = StyleSheet.create({  
-    image:{
-      justifyContent: 'center',
-      alignItems: 'center',
-      width: 30,
-      height: 30,
-    },
+import styles from './styles'
 
-  });
-export default function renderItem({item}){
+const SLIDER_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.75);
+export default function renderItem(item,navigation){
+  
   const boxShadow = {
-    width: 300,
-    height:365,
+    width: ITEM_WIDTH,
+    height:ITEM_WIDTH ,
     color:"#555",
     border:10,
     radius:10,
@@ -32,30 +27,49 @@ export default function renderItem({item}){
     x:2,
     y:10,  
 };
+
+  const switchTipology = (type) =>{
+    switch (type) {
+      case 0:
+        return "Residenziale";
+    
+      case 1:
+        return "Box Auto";
+      case 2:
+          return "Commerciale";
+      default:
+        
+    }
+
+  }
     return (
       <BoxShadow setting={boxShadow}>
-        <View style={{
-            flexDirection: 'column',
-            justifyContent: 'space-evenly',
-            backgroundColor:white,
-            borderRadius: 5,
-            height: 350,
-            padding: 20,
-            paddingBottom: 20,
-            marginTop:5,
-            }}>
-          <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text >{item.title}</Text>
-            <HomeIcon style={styles.image} width={styles.image.width} height={styles.image.height} fill={secondaryColorOpacity}/>
+         <TouchableWithoutFeedback onPress={()=>navigation.navigate('Dettaglio Fascicolo', {data:item, navigation: navigation})}>
+          <View style={{
+              flexDirection: 'column',
+              justifyContent: 'space-evenly',
+              backgroundColor:white,
+              borderRadius: 5,
+              height: ITEM_WIDTH,
+              padding: 16,
+              marginTop:5,
+              }}>
+            <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
+              <Text style={styles.textTitle} >{item.obj.indirizzo}</Text>
+              {switchImage(item.obj.tipology)}
+            </View>
+            <View style={{ flex: 0.1}}>
+              <Text style={styles.textCity}>{item.obj.city === 0 ? "Napoli": "Provincia"}</Text>
+            </View>
+            <View style={{ flex: 0.1, flexDirection: "row", justifyContent: 'space-between', paddingTop: 4}}>
+              <Text style={styles.typeText}>{switchTipology(item.obj.tipology)}</Text>
+              <Text style={styles.statusText}>{`${item.obj.metri}mq`}</Text>
+            </View>
+            <View style={{ flex: 0.5, flexDirection: "row", justifyContent: 'space-between'}}>
+              <Text style={styles.descriptionText}>{item.obj.note}</Text>
+            </View>
           </View>
-          <View style={{ flex: 0.2, flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text>{item.text}</Text>
-            <Text>Vendita</Text>
-          </View>
-          <View style={{ flex: 0.6, flexDirection: "row", justifyContent: 'space-between'}}>
-            <Text>Vendita</Text>
-          </View>
-        </View>
+        </TouchableWithoutFeedback>
       </BoxShadow>
     )
 }
